@@ -15,13 +15,13 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo');
-            $table->longText('descripcion');
-            $table->unsignedBigInteger('tipo_id');
+            $table->string('codigo')->unique();
+            $table->string('descripcion');
             $table->unsignedBigInteger('marca_id');
+            $table->unsignedBigInteger('titem_id');
             $table->unsignedBigInteger('item_id')->nullable();
-            $table->foreign('tipo_id')->references('id')->on('tipos');
             $table->foreign('marca_id')->references('id')->on('marcas');
+            $table->foreign('titem_id')->references('id')->on('titems');
             $table->foreign('item_id')->references('id')->on('items');
             $table->timestamps();
         });

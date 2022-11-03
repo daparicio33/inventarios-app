@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cliente extends Model
+class Movimiento extends Model
 {
     use HasFactory;
+    public function detalles(){
+        return $this->hasMany(MovimientoDetalle::class);
+    }
 }
