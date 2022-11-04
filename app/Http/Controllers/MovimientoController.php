@@ -49,10 +49,10 @@ class MovimientoController extends Controller
     public function store(Request $request)
     {
         //
-        $numero = Movimiento::select('numero')->orderBy('numero','desc')
+        $num = Movimiento::select('numero')->orderBy('numero','desc')
         ->first();
-        if (isset($numero->numero)){
-            $numero = $numero + 1;
+        if (isset($num->numero)){
+            $numero = $num->numero + 1;
         }else{
             $numero = 1;
         }
@@ -73,11 +73,24 @@ class MovimientoController extends Controller
                 $detalle->item_id = $request->items_id[$i];
                 $detalle->cantidad = $request->cantidad[$i];
                 $detalle->save();
+                //si aca se graba el item verifico si
+                $item = Item::findOrFail($request->items_id[$i]);
+                //verifico si tiene items inferiores;
+                if(count($item->hijos)!= 0){
+                    foreach($item->hijos as $hijo){
+                        $detallitos = new MovimientoDetalle;
+                        $detallitos->movimiento_id = $moviento->id;
+                        $detallitos->item_id = $hijo->id;
+                        $detallitos->cantidad = $request->cantidad[$i];
+                        $detallitos->save();
+                    }
+                }
             }
             DB::commit();
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
+            dd($th->getMessage());
             return Redirect::route('inventarios.movimientos.index')
             ->with('error',$th->getMessage());
         }

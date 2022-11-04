@@ -20,9 +20,10 @@ class CreateItemsTable extends Migration
             $table->unsignedBigInteger('marca_id');
             $table->unsignedBigInteger('titem_id');
             $table->unsignedBigInteger('item_id')->nullable();
+            $table->string('url')->default('public/items/defaultitem.png');
             $table->foreign('marca_id')->references('id')->on('marcas');
             $table->foreign('titem_id')->references('id')->on('titems');
-            $table->foreign('item_id')->references('id')->on('items');
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->timestamps();
         });
     }

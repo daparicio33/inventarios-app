@@ -53,13 +53,14 @@
                     <select id="dditems"  class="form-control" aria-label="Example select with button addon">
                       <option selected value="0">Elija...</option>
                       @foreach ($items as $item)
-                        <option value="{{ $item->id }}">{{ $item->codigo }} - {{ $item->titem->nombre }} - {{ $item->marca->nombre }} - {{ $item->descripcion }}</option>
+                        <option value="{{ $item->id }}:{{ $item->url }}" >{{ $item->codigo }} - {{ $item->titem->nombre }} - {{ $item->marca->nombre }} - {{ $item->descripcion }}</option>
                       @endforeach
                     </select>
                 </div>
                 <table class="table">
                     <thead>
                         <tr>
+                            <th style="width: 4rem"></th>
                             <th>ID</th>
                             <th>Descripcion</th>
                             <th>Cantidad</th>
@@ -67,7 +68,6 @@
                         </tr>
                     </thead>
                     <tbody id="tbody">
-
                     </tbody>
                 </table>
             </div>
@@ -86,40 +86,51 @@
         $(document).ready(function() {
             $('#dditems').select2();
         });
+ 
         function agregar(){
             //selecion del elemento
             var item = document.getElementById('dditems');
             //selection del texto
-            if(document.getElementById('fila'+item.value)){
-                var txt = document.getElementById('txt'+item.value);
+            var datos = item.value.split(':');
+            var id = datos[0];
+            var url = datos[1].split('/');
+            if(document.getElementById('fila'+id)){
+                var txt = document.getElementById('txt'+id);
                 txt.value = parseInt(txt.value)+1;
             }else{
                 var texto = item.options[item.selectedIndex].text;
-                if (item.value == 0){
+                if (id == 0){
                     alert('selecione algun elemento');
                 }else{
                     //selecciono el body de la tabla
                     var tbody = document.getElementById('tbody');
                     //creare una fila
                     var tr = document.createElement('tr');
-                    tr.id = 'fila'+item.value;
+                    tr.id = 'fila'+id;
                     //creare las columnas
+                    var td0 = document.createElement('td');
+                    var img = document.createElement('img');
+                    img.src = '/storage/'+url[1]+'/'+url[2];
+                    img.style.width = '4rem';
+                    img.class = 'rounded mx-auto d-block';
+                    td0.appendChild(img);
                     var td1 = document.createElement('td');
                     var td2 = document.createElement('td');
                     var td3 = document.createElement('td');
                     var td4 = document.createElement('td');
-                    td1.appendChild(document.createTextNode(item.value));
+
+                    td1.appendChild(document.createTextNode(id));
                     //vamos a poner el texto con los id de los elementos agregados
                     var item_id = document.createElement('input');
                     item_id.type = 'hidden';
                     item_id.name = 'items_id[]';
-                    item_id.value = item.value;
+                    item_id.value = id;
                     td1.appendChild(item_id);
                     td2.appendChild(document.createTextNode(texto));
                     //creamos cuadro de texto
                     var text = document.createElement('input');
                     text.type = 'number';
-                    text.id = 'txt'+item.value;
+                    text.id = 'txt'+id;
                     text.setAttribute('class','form-control');
                     text.value = 1;
                     text.name = "cantidad[]";  
@@ -132,8 +143,9 @@
                     btn.appendChild(i);
                     btn.setAttribute('class','btn btn-danger')
                     btn.title= 'eliminar elemento';
-                    btn.setAttribute('onclick','deleterow('+item.value+')');
+                    btn.setAttribute('onclick','deleterow('+id+')');
                     td4.appendChild(btn);
+                    tr.appendChild(td0);
                     tr.appendChild(td1);
                     tr.appendChild(td2);
                     tr.appendChild(td3);

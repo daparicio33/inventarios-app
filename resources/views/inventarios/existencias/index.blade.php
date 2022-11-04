@@ -21,12 +21,14 @@
             </thead>
             <tbody>
                 @foreach ($items as $item)
-                    <tr @if (count($item->hijos) != 0) class="bg-primary" @endif>
+                    <tr @if (count($item->hijos) != 0) class="bg-info" @endif>
                         <td>{{ $item->codigo }}</td>
-                        <td>{{ $item->descripcion }} <span class="badge bg-danger rounded-pill">{{ count($item->hijos) }}</span></td>
+                        <td>{{ $item->descripcion }} <span class="badge bg-danger rounded-pill">{{ count($item->hijos) }} Items</span></td>
                         <td>{{ $item->marca->nombre }}</td>
                         <td>{{ $item->titem->nombre }}</td>
-                        <td> {{ numeros() }}</td>
+                        <td>
+                            <span class="badge bg-secondary rounded-pill">en almacen {{ numeros($item->id) }}</span>
+                        </td>
                     </tr>
                     @if (count($item->hijos) != 0) 
                             <tr>
@@ -34,7 +36,7 @@
                                 <td colspan="3">
                                     <ol class="list-group list-group-numbered">
                                         @foreach ($item->hijos as $hijo)
-                                            <li class="list-group-item">{{ $hijo->codigo }} - {{ $hijo->descripcion }}</li>
+                                            <li class="list-group-item">{{ $hijo->codigo }} - {{ $hijo->descripcion }} <span class="badge bg-primary rounded-pill">En almacen {{ numeros($hijo->id) }}</span></li>
                                         @endforeach
                                     </ol>   
                                 </td>

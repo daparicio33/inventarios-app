@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         //item superiores
         $item1 = Item::create([
             'codigo'=>'001',
-            'descripcion'=>'What is Lorem Ipsum',
+            'descripcion'=>'Maleta de Correccion',
             'marca_id'=>$marca1->id,
             'titem_id'=>$titem1->id
         ]);
@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
         //otro item
         $item2 = Item::create([
             'codigo'=>'005',
-            'descripcion'=>'Where does it come from',
+            'descripcion'=>'Juego de llaves de precision',
             'marca_id'=>$marca2->id,
             'titem_id'=>$titem2->id
         ]);
@@ -86,7 +86,7 @@ class DatabaseSeeder extends Seeder
         //otro item
         $item2 = Item::create([
             'codigo'=>'009',
-            'descripcion'=>'The standard Lorem Ipsum passage, used since the 1500s',
+            'descripcion'=>'Kit de Mantenimiento de Dados',
             'marca_id'=>$marca3->id,
             'titem_id'=>$titem3->id
         ]);

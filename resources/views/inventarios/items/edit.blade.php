@@ -1,10 +1,10 @@
 @extends('adminlte::page')
-@section('title', 'Crear Item')
+@section('title', 'Editar Item')
 @section('content_header')
     <h1 class="text-primary"><i class="fas fa-marker"></i> Crear Item</h1>
 @stop
 @section('content')
-    {!! Form::open(['route'=>'inventarios.items.store','method'=>'post','enctype'=>'multipart/form-data']) !!}
+    {!! Form::model($item, ['route'=>['inventarios.items.update',$item->id],'method'=>'PUT','enctype'=>'multipart/form-data']) !!}
     <div class="row">
         <div class="col-sm-12 col-md-7 col-lg-7">
             <div class="card">
@@ -41,8 +41,8 @@
                             </label>
                             <select name="item_id" id="item_id" class="form-control">
                                 <option value="0" class="form-control" >Sin padre</option>
-                                @foreach ($items as $item)
-                                    <option value="{{ $item->id }}">{{ $item->descripcion }}</option>
+                                @foreach ($items as $itemm)
+                                    <option value="{{ $itemm->id }}">{{ $itemm->descripcion }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -57,7 +57,7 @@
         </div>
         <div class="col-sm-12 col-md-5 col-lg-5">
             <div class="card">
-                <img id='imgpreview' style="max-width: 90%" src="{{ Storage::url('public/items/defaultitem.png') }}" class="rounded mx-auto d-block" alt="...">
+                <img id='imgpreview' style="max-width: 90%" src="{{ Storage::url($item->url) }}" class="rounded mx-auto d-block" alt="...">
                 <div class="card-body">
                     <x-adminlte-input-file onchange="previewimage(event,'#imgpreview')" name="url" igroup-size="sm" placeholder="Elija un archivo...">
                         <x-slot name="prependSlot">
