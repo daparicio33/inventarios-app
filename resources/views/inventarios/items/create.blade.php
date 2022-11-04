@@ -21,7 +21,7 @@
                             <i class="fas fa-stream"></i> Descripcion
                         </label>
                         {!! Form::textarea('descripcion', null, ['class'=>'form-control', 'rows'=>'3']) !!}
-                        <div class="row mt-2">
+                        <div class="row mt-2" id="marcatipo">
                             <div class="col-sm-12 col-md-6">
                                 <label for="">
                                     <i class="fab fa-markdown"></i> Marca
@@ -39,7 +39,7 @@
                             <label for="">
                                 <i class="fas fa-superscript"></i> Item padre
                             </label>
-                            <select name="item_id" id="item_id" class="form-control">
+                            <select name="item_id" id="item_id" class="form-control" onchange="selectpadre()">
                                 <option value="0" class="form-control" >Sin padre</option>
                                 @foreach ($items as $item)
                                     <option value="{{ $item->id }}">{{ $item->descripcion }}</option>
@@ -78,6 +78,16 @@
         $(document).ready(function() {
             $('#marca_id').select2();
             $('#titem_id').select2();
+            $('#item_id').select2();
         });
+        function selectpadre (){
+            let sel = document.getElementById('item_id');
+            let marcatipo = document.getElementById('marcatipo');
+            if (sel.value == 0){
+                marcatipo.style.display = 'flex';
+            }else{
+                marcatipo.style.display = 'none';
+            }
+        }
     </script>
 @stop

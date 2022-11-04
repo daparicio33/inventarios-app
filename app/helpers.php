@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\MovimientoDetalle;
+use App\Models\User;
 
 function numeros($id){
     $dmovimientos = MovimientoDetalle::where('item_id','=',$id)
@@ -10,4 +11,8 @@ function numeros($id){
         $cantidad = $dmovimiento->movimiento->tmovimiento->factor * $dmovimiento->cantidad + $cantidad;
     }
     return $cantidad;
+}
+function almacen(){
+    $id = User::findOrFail(auth()->id());
+    return $id->encargado->almacene_id;
 }

@@ -18,6 +18,7 @@ class CreateEncargadosTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('cargo_id');
             $table->unsignedBigInteger('almacene_id');
+            $table->unique(['user_id','almacene_id']);
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('cargo_id')->references('id')->on('cargos');
             $table->foreign('almacene_id')->references('id')->on('almacenes');

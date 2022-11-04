@@ -21,6 +21,7 @@ class MovimientoController extends Controller
     {
         //
         $movimientos = Movimiento::orderBy('id','desc')
+        ->where('almacene_id','=',almacen())
         ->get();
         return view('inventarios.movimientos.index',compact('movimientos'));
     }
@@ -65,6 +66,7 @@ class MovimientoController extends Controller
             $moviento->fecha = $request->fecha;
             $moviento->hora = $request->hora;
             $moviento->numero = $numero;
+            $moviento->almacene_id = almacen();
             $moviento->save();
             $rows = count($request->items_id);
             for ($i=0; $i<$rows; $i++){

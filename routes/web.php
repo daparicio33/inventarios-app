@@ -22,13 +22,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //rutas para los items
 Route::resource('inventarios/items',ItemController::class)
@@ -45,8 +41,6 @@ Route::resource('inventarios/movimientos/detalles',MovimientoDetalleController::
 //rutas para saber las existencias
 Route::resource('inventarios/existencias',ExistenciaController::class)
 ->names('inventarios.existencias');
-
-
 
 Route::get('clear-cache',function(){
    echo Artisan::call('cache:clear');

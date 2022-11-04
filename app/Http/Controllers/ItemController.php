@@ -21,6 +21,7 @@ class ItemController extends Controller
         //
         $items = Item::orderBy('id','desc')
         ->where('item_id','=',null)
+        ->where('almacene_id','=',almacen())
         ->get();
         return view('inventarios.items.index',compact('items'));
     }
@@ -53,6 +54,13 @@ class ItemController extends Controller
             $item = new Item();
             if ($request->item_id != 0){
                 $item->item_id = $request->item_id;
+                //como tiene padre vamos a buscar sus atributos
+                $padre = Item::findOrFail($request->item_id);
+                $item->marca_id = $padre->marca_id;
+                $item->titem_id = $padre->titem_id;
+            }else{
+                $item->marca_id = $request->marca_id;
+                $item->titem_id = $request->titem_id;
             }
             if($request->hasFile('url')){
                 $url = Storage::put('public/items', $request->file('url'));
@@ -60,8 +68,7 @@ class ItemController extends Controller
             }
             $item->codigo = $request->codigo;
             $item->descripcion = $request->descripcion;
-            $item->marca_id = $request->marca_id;
-            $item->titem_id = $request->titem_id;
+            $item->almacene_id = almacen();
             $item->save();
         } catch (\Throwable $th) {
             //throw $th;
@@ -113,6 +120,13 @@ class ItemController extends Controller
             $item = Item::findOrFail($id);
             if ($request->item_id != 0){
                 $item->item_id = $request->item_id;
+                //como tiene padre vamos a buscar sus atributos
+                $padre = Item::findOrFail($request->item_id);
+                $item->marca_id = $padre->marca_id;
+                $item->titem_id = $padre->titem_id;
+            }else{
+                $item->marca_id = $request->marca_id;
+                $item->titem_id = $request->titem_id;
             }
             if($request->hasFile('url')){
                 $url = Storage::put('public/items', $request->file('url'));
@@ -120,8 +134,7 @@ class ItemController extends Controller
             }
             $item->codigo = $request->codigo;
             $item->descripcion = $request->descripcion;
-            $item->marca_id = $request->marca_id;
-            $item->titem_id = $request->titem_id;
+            $item->update();
         } catch (\Throwable $th) {
             //throw $th;
             return Redirect::route('inventarios.items.index')
