@@ -1,5 +1,10 @@
+copiar el archivo .env.example
+y a la copia cambiarle el nombre
 composer install
 php artisan key:generate
+npm install
+npm run dev
 php artisan cache:clear
 php artisan config:clear
 php artisan config:cache
+php artisan migrate:fresh --seed
