@@ -19,6 +19,7 @@ class CreateMovimientosTable extends Migration
             $table->integer('numero');
             $table->date('fecha');
             $table->time('hora');
+            $table->date('fdevolucion');
             $table->unsignedBigInteger('tmovimiento_id');
             $table->foreign('tmovimiento_id')->references('id')->on('tmovimientos');
             $table->timestamps();

@@ -2,10 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Almacene;
+use App\Models\Cargo;
+use App\Models\Encargado;
 use App\Models\Item;
 use App\Models\Marca;
 use App\Models\Titem;
 use App\Models\Tmovimiento;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,6 +21,53 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //creando usuarios
+        $administrador = User::create([
+            'name'=>'Administrador',
+            'email'=>'administrador@gmail.com',
+            'password'=>bcrypt('12345678')
+        ]);
+        $jefe = User::create([
+            'name'=>'Jefe de Almacen',
+            'email'=>'jefe@gmail.com',
+            'password'=>bcrypt('12345678')
+        ]);
+        $almacenero = User::create([
+            'name'=>'Almacenero',
+            'email'=>'almacenero@gmail.com',
+            'password'=>bcrypt('12345678')
+        ]);
+        //crear almacen
+        $almacen = Almacene::create([
+            'nombre'=>'Almacen Programacion',
+            'observacion'=>'este almacen pertence al laboratorio de programacion'
+        ]);
+        //cargos
+        $cargo1 = Cargo::create([
+            'nombre'=>'Administrador'
+        ]);
+        $cargo2 = Cargo::create([
+            'nombre'=>'Jefe de Almacen'
+        ]);
+        $cargo3 = Cargo::create([
+            'nombre'=>'Almacenero'
+        ]);
+        //creando encargados
+        Encargado::create([
+            'user_id'=>$administrador->id,
+            'cargo_id'=>$cargo1->id,
+            'almacene_id'=>$almacen->id,
+        ]);
+        Encargado::create([
+            'user_id'=>$jefe->id,
+            'cargo_id'=>$cargo2->id,
+            'almacene_id'=>$almacen->id,
+        ]);
+        Encargado::create([
+            'user_id'=>$almacenero->id,
+            'cargo_id'=>$cargo3->id,
+            'almacene_id'=>$almacen->id,
+        ]);
         // \App\Models\User::factory(10)->create();
         $marca1=Marca::create(['nombre'=>'Bosh']);
         $marca2=Marca::create(['nombre'=>'Truper']);
@@ -30,7 +81,8 @@ class DatabaseSeeder extends Seeder
             'codigo'=>'001',
             'descripcion'=>'Maleta de Correccion',
             'marca_id'=>$marca1->id,
-            'titem_id'=>$titem1->id
+            'titem_id'=>$titem1->id,
+            'almacene_id'=>$almacen->id
         ]);
         //item inferios
         Item::create([
@@ -38,28 +90,32 @@ class DatabaseSeeder extends Seeder
             'descripcion'=>'What is Lorem Ipsum 01',
             'marca_id'=>$marca1->id,
             'titem_id'=>$titem1->id,
-            'item_id'=>$item1->id
+            'item_id'=>$item1->id,
+            'almacene_id'=>$almacen->id
         ]);
         Item::create([
             'codigo'=>'003',
             'descripcion'=>'What is Lorem Ipsum 02',
             'marca_id'=>$marca1->id,
             'titem_id'=>$titem1->id,
-            'item_id'=>$item1->id
+            'item_id'=>$item1->id,
+            'almacene_id'=>$almacen->id
         ]);
         Item::create([
             'codigo'=>'004',
             'descripcion'=>'What is Lorem Ipsum 03',
             'marca_id'=>$marca1->id,
             'titem_id'=>$titem1->id,
-            'item_id'=>$item1->id
+            'item_id'=>$item1->id,
+            'almacene_id'=>$almacen->id
         ]);
         //otro item
         $item2 = Item::create([
             'codigo'=>'005',
             'descripcion'=>'Juego de llaves de precision',
             'marca_id'=>$marca2->id,
-            'titem_id'=>$titem2->id
+            'titem_id'=>$titem2->id,
+            'almacene_id'=>$almacen->id
         ]);
         //item inferios
         Item::create([
@@ -67,28 +123,32 @@ class DatabaseSeeder extends Seeder
             'descripcion'=>'Where does it come from 01',
             'marca_id'=>$marca2->id,
             'titem_id'=>$titem2->id,
-            'item_id'=>$item2->id
+            'item_id'=>$item2->id,
+            'almacene_id'=>$almacen->id
         ]);
         Item::create([
             'codigo'=>'007',
             'descripcion'=>'Where does it come from 02',
             'marca_id'=>$marca2->id,
             'titem_id'=>$titem2->id,
-            'item_id'=>$item2->id
+            'item_id'=>$item2->id,
+            'almacene_id'=>$almacen->id
         ]);
         Item::create([
             'codigo'=>'008',
             'descripcion'=>'Where does it come from 03',
             'marca_id'=>$marca2->id,
             'titem_id'=>$titem2->id,
-            'item_id'=>$item2->id
+            'item_id'=>$item2->id,
+            'almacene_id'=>$almacen->id
         ]);
         //otro item
         $item2 = Item::create([
             'codigo'=>'009',
             'descripcion'=>'Kit de Mantenimiento de Dados',
             'marca_id'=>$marca3->id,
-            'titem_id'=>$titem3->id
+            'titem_id'=>$titem3->id,
+            'almacene_id'=>$almacen->id
         ]);
         //tipos de movimientos
         Tmovimiento::create(['nombre'=>'Ingreso','factor'=>1]);

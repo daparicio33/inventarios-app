@@ -311,37 +311,14 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
-        [
+        /* [
             'text'        => 'pages',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,
             'label_color' => 'success',
-        ],
-        ['header'=>'USUARIO'],
-        [
-            'text'=>'Nuevo',
-            'url'=>'usuarios/create',
-            'icon'=>'fas fa-user'
-        ],
-        [
-            'text'=>'Lista',
-            'url'=>'usuarios',
-            'icon'=>'fas fa-bars'
-        ],
-        ['header'=>'PRODUCTOS'],
-        [
-            'text'=>'nuevo',
-            'url'=>'productos/create',
-            'icon'=>'fas fa-cart-plus',
-        ],
-        [
-            'text'=>'lista',
-            'url'=>'productos',
-            'icon'=>'fas fa-store',
-        ],
-        ['header'=>'TIPOS'],
-        ['header'=>'ENVIOS'],
+        ], */
+        
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
@@ -354,6 +331,38 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
+            'text'=>'INVENTARIOS',
+            'icon'=>'fas fa-truck-moving',
+            'submenu'=>[
+                [
+                    'text'=>'Movimientos',
+                    'icon'=>'fas fa-people-carry',
+                    'route'=>'inventarios.movimientos.index'
+                ],
+                [
+                    'text'=>'Items',
+                    'icon'=>'fas fa-trailer',
+                    'route'=>'inventarios.items.index'
+                ],
+                [
+                    'text'=>'Existencias',
+                    'icon'=>'fas fa-wrench',
+                    'route'=>'inventarios.existencias.index'
+                ],
+                [
+                    'text'=>'Marcas',
+                    'icon'=>'fas fa-wrench',
+                    'route'=>'inventarios.marcas.index'
+                ],
+                [
+                    'text'=>'Tipos Items',
+                    'icon'=>'fas fa-wrench',
+                    'route'=>'inventarios.titems.index'
+                ],
+            ]
+        ],
+        
+        /* [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
@@ -390,7 +399,7 @@ return [
                     'url'  => '#',
                 ],
             ],
-        ],
+        ], */
         ['header' => 'labels'],
         [
             'text'       => 'important',
