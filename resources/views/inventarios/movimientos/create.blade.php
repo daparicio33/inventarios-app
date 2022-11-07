@@ -5,7 +5,7 @@
     <p>registrar el movimiento del inventario</p>
 @stop
 @section('content')
-{!! Form::open(['route'=>'inventarios.movimientos.store','method'=>'post']) !!}
+
 <div class="row">
     {{-- encabezados del formulario --}}
     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -14,24 +14,49 @@
                 <h5>Datos</h5>
             </div>
             <div class="card-body">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="ingrese DNI" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-primary ml-1" type="button" id="button-addon2">
-                        <i class="fab fa-searchengin"></i>
-                        Buscar
-                    </button>
-                </div>
+                @include('inventarios.movimientos.search')
+{!! Form::open(['route'=>'inventarios.movimientos.store','method'=>'post']) !!}                
+                {{-- datos del cliente --}}
+                @if (isset($cliente)) 
+                    <input type="hidden" value="{{ $cliente->idCliente }}" name="cliente_id">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4 col-lg-4">
+                            {!! Form::label(null, 'Nombre', [null]) !!}
+                            {!! Form::text('nombre', $cliente->nombre, ['class'=>'form-control']) !!}
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-4">
+                            {!! Form::label(null, 'Apellido', [null]) !!}
+                            {!! Form::text('apellido', $cliente->apellido, ['class'=>'form-control']) !!}
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-4">
+                            {!! Form::label(null, 'Telefono', [null]) !!}
+                            {!! Form::text('telefono', $cliente->telefono, ['class'=>'form-control']) !!}
+                        </div>
+                        <div class="col-sm-12 col-md-8 col-lg-8">
+                            {!! Form::label(null, 'Direccion', [null]) !!}
+                            {!! Form::text('direccion', $cliente->direccion, ['class'=>'form-control']) !!}
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-4">
+                            {!! Form::label(null, 'Email', [null]) !!}
+                            {!! Form::text('email', $cliente->email, ['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                @endif
                 {{-- fechas y hora --}}
                 <div class="row">
-                    <div class="col-sm-12 col-md-4 col-lg-4">
-                        <label for="">Fecha</label>
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <label for="">F Entrega</label>
                         {!! Form::date('fecha', null, ['class'=>'form-control']) !!}
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <label for="">F Regreso</label>
+                        {!! Form::date('fdevolucion', null, ['class'=>'form-control']) !!}
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3">
                         <label for="">Hora</label>
                         {!! Form::time('hora', null, ['class'=>'form-control']) !!}
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="col-sm-12 col-md-3 col-lg-3">
                         <label for="">T. Movimiento</label>
                         {!! Form::select('tmovimiento_id', $tmovimientos, 4, ['class'=>'form-control']) !!}
                     </div>

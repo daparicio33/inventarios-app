@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Models\Item;
 use App\Models\Movimiento;
 use App\Models\MovimientoDetalle;
@@ -31,14 +32,20 @@ class MovimientoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $cliente = null;
+        if ($request->searchText){
+            $cliente = Cliente::where('dniRuc','=',$request->searchText)
+            ->first();
+        }
+        $searchText = $request->searchText;
         $tmovimientos = Tmovimiento::orderBy('nombre','asc')
         ->pluck('nombre','id')->toArray();
         $items = Item::orderBy('descripcion','asc')
         ->get();
-        return view('inventarios.movimientos.create',compact('tmovimientos','items'));
+        return view('inventarios.movimientos.create',compact('tmovimientos','items','searchText','cliente'));
     }
 
     /**
@@ -59,19 +66,20 @@ class MovimientoController extends Controller
         }
         try {
             //code...
-            
             DB::beginTransaction();
-            $moviento = new Movimiento;
-            $moviento->tmovimiento_id = $request->tmovimiento_id;
-            $moviento->fecha = $request->fecha;
-            $moviento->hora = $request->hora;
-            $moviento->numero = $numero;
-            $moviento->almacene_id = almacen();
-            $moviento->save();
+            $movimiento = new Movimiento;
+            $movimiento->tmovimiento_id = $request->tmovimiento_id;
+            $movimiento->fecha = $request->fecha;
+            $movimiento->hora = $request->hora;
+            $movimiento->numero = $numero;
+            $movimiento->fdevolucion = $request->fdevolucion;
+            $movimiento->cliente_id = $request->cliente_id;
+            $movimiento->almacene_id = almacen();
+            $movimiento->save();
             $rows = count($request->items_id);
             for ($i=0; $i<$rows; $i++){
                 $detalle = new MovimientoDetalle;
-                $detalle->movimiento_id = $moviento->id;
+                $detalle->movimiento_id = $movimiento->id;
                 $detalle->item_id = $request->items_id[$i];
                 $detalle->cantidad = $request->cantidad[$i];
                 $detalle->save();
@@ -81,7 +89,7 @@ class MovimientoController extends Controller
                 if(count($item->hijos)!= 0){
                     foreach($item->hijos as $hijo){
                         $detallitos = new MovimientoDetalle;
-                        $detallitos->movimiento_id = $moviento->id;
+                        $detallitos->movimiento_id = $movimiento->id;
                         $detallitos->item_id = $hijo->id;
                         $detallitos->cantidad = $request->cantidad[$i];
                         $detallitos->save();

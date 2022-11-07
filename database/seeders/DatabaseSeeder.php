@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Almacene;
 use App\Models\Cargo;
+use App\Models\Cliente;
 use App\Models\Encargado;
 use App\Models\Item;
 use App\Models\Marca;
@@ -21,6 +22,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //creando clientes
+        Cliente::create([
+            'dniRuc'=>'43053643',
+            'nombre'=>'Davis Williams',
+            'apellido'=>'Aparicio Palomino',
+            'telefono'=>'935526612',
+            'telefono2'=>'935526612',
+            'direccion'=>'Psj. Toribio Rodriguez de Mendoza 105',
+            'email'=>'dwaparicicio@gmail.com'
+        ]);
+        Cliente::create([
+            'dniRuc'=>'12345678',
+            'nombre'=>'Pedro',
+            'apellido'=>'Castillo Terrones',
+            'telefono'=>'935526612',
+            'telefono2'=>'935526612',
+            'direccion'=>'Jr. Palacio de Gorbierno 123',
+            'email'=>'dwaparicicio@gmail.com'
+        ]);
         //creando usuarios
         $administrador = User::create([
             'name'=>'Administrador',
