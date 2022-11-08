@@ -359,7 +359,18 @@ return [
                 [
                     'text'=>'Movimientos',
                     'icon'=>'fas fa-people-carry',
-                    'route'=>'inventarios.movimientos.index'
+                    'submenu'=>[
+                        [
+                            'text'=>'Movimientos',
+                            'icon'=>'fas fa-suitcase',
+                            'route'=>'inventarios.movimientos.index'
+                        ],
+                        [
+                            'text'=>'Tipos',
+                            'icon'=>'fas fa-text-height',
+                            'route'=>'inventarios.movimientos.tmovimientos.index'
+                        ]
+                    ],
                 ],
                 [
                     'text'=>'Items',
