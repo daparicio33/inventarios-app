@@ -2,7 +2,7 @@
 @section('title', 'Almacenes')
 @section('content_header')
 <h1>Almacenes</h1>
-<a href="almacenes/create"><button class="btn btn-primary"><i class="fas fa-plus"></i> Nuevo almacen</button></a>
+<a href="{{ route('administrador.almacenes.create') }}"><button class="btn btn-primary"><i class="fas fa-plus"></i> Nuevo almacen</button></a>
 <table>
     <thead>
         <tr>
@@ -11,16 +11,16 @@
         </tr>
     </thead>
     <tbody>
-        {{-- @foreach ($almacenes as $almacene) --}}
+        @foreach ($almacenes as $almacene)
             <tr>
-                {{-- <td>{{ $almacene->nombre }}</td>
+                <td>{{ $almacene->nombre }}</td>
                 <td>{{ $almacene->observacion }}</td>
-                <td>
-                    <a href="{{ asset('almacenes/'.$almacene->id."/edit") }}">Editar</a>
-                </td> --}}
-            <td> 
+                <td style="width: 130p; text-align: center">
+                    <a title="Editar" href="{{ route('administrador.almacenes.edit', $almacene->id) }}"><button class="btn btn-primary"><i class="fas fa-pen"></i></button></a>
+                </td>
+            <td style="width: 130p; text-align: center"> 
                      <!-- Button trigger modal -->
-           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+           <button title="Eliminar" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
               <i class="fas fa-trash"></i>
            </button>
             </td>
@@ -38,17 +38,17 @@
                    </div>
                    <div class="modal-footer">
                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-ban"></i> Cancelar</button>
-                   <button type="button" class="btn btn-danger">Confirmar</button>
+                   {!! Form::open(['route'=>['administrador.almacenes.destroy', $almacene->id], 'method'=> 'delete']) !!}
+                   <button type="submit" class="btn btn-danger">Confimar</button>
+                   {!! Form::close() !!}
                    </div>
                </div>
                </div>
            </div>
            </div>
-           <td>
-            <a href="almacenes/{id}/edit"><button class="btn btn-primary"><i class="fas fa-pen"></i></button></a>
-           </td>
+          
             </tr>
-        {{-- @endforeach --}}
+        @endforeach
     </tbody>
 </table>
 @endsection
