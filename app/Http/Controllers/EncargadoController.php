@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Redirect;
 class EncargadoController extends Controller
 {
     //
+    public function __construct()
+    {
+        return $this->middleware('auth');
+    }
 
     public function index (){
         $encargados = Encargado::all();
