@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AlmaceneController;
+use App\Http\Controllers\EncargadoController;
 use App\Http\Controllers\ExistenciaController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MarcaController;
@@ -41,6 +43,11 @@ Route::resource('inventarios/movimientos/detalles',MovimientoDetalleController::
 //rutas para saber las existencias
 Route::resource('inventarios/existencias',ExistenciaController::class)
 ->names('inventarios.existencias');
+//Rutas para administrador
+Route::resource('administrador/almacenes/',AlmaceneController::class)
+->names('administrador.almacenes');
+Route::resource('administrador/almacenes/encargados/',EncargadoController::class)
+->names('administrador.almacenes.encargados');
 
 Route::get('clear-cache',function(){
    echo Artisan::call('cache:clear');

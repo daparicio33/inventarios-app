@@ -331,6 +331,28 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
+            'text'=>'ADMINISTRADOR',
+            'icon'=>'fas fa-users-cog',
+            'submenu'=>[
+                [
+                    'text'=>'Almacenes',
+                    'icon'=>'fas fa-store',
+                    'submenu'=>[
+                        [
+                            'text'=>'Almacen',
+                            'icon'=>'fas fa-store',
+                            'route'=>'administrador.almacenes.index'
+                        ],
+                        [
+                            'text'=>'Encargados',
+                            'icon'=>'fas fa-user-tag',
+                            'route'=>'administrador.almacenes.encargados.index'
+                        ]
+                    ]
+                ],
+            ],
+        ],
+        [
             'text'=>'INVENTARIOS',
             'icon'=>'fas fa-truck-moving',
             'submenu'=>[
