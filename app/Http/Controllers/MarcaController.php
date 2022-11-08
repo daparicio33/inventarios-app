@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Marca;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class MarcaController extends Controller
 {
@@ -14,6 +16,9 @@ class MarcaController extends Controller
     public function index()
     {
         //
+        $marcas = Marca::all();
+        return view('inventarios.marcas.index', compact('marcas'));
+
     }
 
     /**
@@ -24,6 +29,8 @@ class MarcaController extends Controller
     public function create()
     {
         //
+        return view('inventarios.marcas.create');
+
     }
 
     /**
@@ -35,6 +42,10 @@ class MarcaController extends Controller
     public function store(Request $request)
     {
         //
+        $marca = new Marca();
+        $marca->nombre = $request->nombre;
+        $marca->save();
+        return Redirect::route('marcas');
     }
 
     /**
@@ -57,6 +68,8 @@ class MarcaController extends Controller
     public function edit($id)
     {
         //
+        $marcas = Marca::findOrfail($id);
+        return view('inventarios.marcas.edit', compact('marcas'));
     }
 
     /**
@@ -69,6 +82,11 @@ class MarcaController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $marca = Marca::findOrfail($id);
+        $marca->nombre = $request->nombre;
+        $marca->update();
+        return Redirect::route('marcas');
+
     }
 
     /**
@@ -80,5 +98,9 @@ class MarcaController extends Controller
     public function destroy($id)
     {
         //
+        $marca = Marca::findOrfail($Id);
+        $marca->nombre = $request->nombre;
+        $marca->destroy();
+        return Redirect::route('marcas')
     }
 }

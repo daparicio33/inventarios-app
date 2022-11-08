@@ -128,6 +128,8 @@ class MovimientoController extends Controller
     public function edit($id)
     {
         //
+        $movimiento = Movimiento::findOrfail($id);
+        return view('inventarios.movimientos.edit', compact('movimientos'));
     }
 
     /**
@@ -140,6 +142,56 @@ class MovimientoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $num = Movimiento::select('numero')->orderBy('numero','desc')
+        ->first();
+        if (isset($num->numero)){
+            $numero = $num->numero + 1;
+        }else{
+            $numero = 1;
+        }
+        try {
+            //code...
+            DB::beginTransaction();
+            $movimiento = new Movimiento;
+            $movimiento->tmovimiento_id = $request->tmovimiento_id;
+            $movimiento->fecha = $request->fecha;
+            $movimiento->hora = $request->hora;
+            $movimiento->numero = $numero;
+            $movimiento->fdevolucion = $request->fdevolucion;
+            $movimiento->cliente_id = $request->cliente_id;
+            $movimiento->almacene_id = almacen();
+            $movimiento->update();
+            $rows = count($request->items_id);
+            for ($i=0; $i<$rows; $i++){
+                $detalle = new MovimientoDetalle;
+                $detalle->movimiento_id = $movimiento->id;
+                $detalle->item_id = $request->items_id[$i];
+                $detalle->cantidad = $request->cantidad[$i];
+                $detalle->update();
+                //si aca se graba el item verifico si
+                $item = Item::findOrFail($request->items_id[$i]);
+                //verifico si tiene items inferiores;
+                if(count($item->hijos)!= 0){
+                    foreach($item->hijos as $hijo){
+                        $detallitos = new MovimientoDetalle;
+                        $detallitos->movimiento_id = $movimiento->id;
+                        $detallitos->item_id = $hijo->id;
+                        $detallitos->cantidad = $request->cantidad[$i];
+                        $detallitos->update();
+                    }
+                }
+            }
+            DB::commit();
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            dd($th->getMessage());
+            return Redirect::route('inventarios.movimientos.index')
+            ->with('error',$th->getMessage());
+        }
+        return Redirect::route('inventarios.movimientos.index')
+        ->with('info','movimiento guardado');
+    }
     }
 
     /**
