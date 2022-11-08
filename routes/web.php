@@ -9,7 +9,6 @@ use App\Http\Controllers\MovimientoController;
 use App\Http\Controllers\MovimientoDetalleController;
 use App\Http\Controllers\TitemController;
 use App\Http\Controllers\TmovimientoController;
-use App\Models\Titem;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -30,32 +29,35 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //rutas para los items
-Route::resource('inventarios/items/',ItemController::class)
+Route::resource('inventarios/items',ItemController::class)
 ->names('inventarios.items');
-Route::resource('inventarios/marcas/',MarcaController::class)
+Route::resource('inventarios/marcas',MarcaController::class)
 ->names('inventarios.marcas');
-Route::resource('inventarios/titems/',TitemController::class)
+Route::resource('inventarios/titems',TitemController::class)
 ->names('inventarios.titems');
 //rutas para los movimientos
-Route::resource('inventarios/movimientos/',MovimientoController::class)
+Route::resource('inventarios/movimientos',MovimientoController::class)
 ->names('inventarios.movimientos');
-Route::resource('inventarios/movimientos/detalles/',MovimientoDetalleController::class)
+Route::resource('inventarios/movimientos/detalles',MovimientoDetalleController::class)
 ->names('inventarios.movimientos.detalles');
-Route::resource('inventarios/movimientos/tmovimientos/',TmovimientoController::class)
+Route::resource('inventarios/movimientos/tmovimientos',TmovimientoController::class)
 ->names('inventarios.movimientos.tmovimientos');
 
 
 //rutas para saber las existencias
-Route::resource('inventarios/existencias/',ExistenciaController::class)
+Route::resource('inventarios/existencias',ExistenciaController::class)
 ->names('inventarios.existencias');
 //Rutas para administrador
-Route::resource('administrador/almacenes/',AlmaceneController::class)
-->names('administrador.almacenes');
-Route::resource('administrador/almacenes/encargados/',EncargadoController::class)
+
+Route::resource('administrador/almacenes/encargados',EncargadoController::class)
 ->names('administrador.almacenes.encargados');
+Route::resource('administrador/almacenes',AlmaceneController::class)
+->names('administrador.almacenes');
+
 
 Route::get('clear-cache',function(){
    echo Artisan::call('cache:clear');
    echo Artisan::call('config:clear');
    echo Artisan::call('config:cache');
+   echo Artisan::call('route:cache');
 });

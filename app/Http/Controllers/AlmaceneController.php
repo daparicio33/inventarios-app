@@ -9,28 +9,29 @@ class AlmaceneController extends Controller
 {
     //
     
-    function index(){
+    
+    public function index(){
         $almacenes = Almacene::all();
          return view('administrador.almacenes.index', compact('almacenes'));
     }
-    function create(){
+    public function create(){
          return view('administrador.almacenes.create');
     }
-    function store(Request $request){
+    public function store(Request $request){
        $almacene = new Almacene();
         $almacene->nombre = $request->nombre;
-        $almacene->observacion  = $request->observacion;
+        $almacene->observacion = $request->observacion;
         $almacene->save();
-        return Redirect::route('almacenes');
+        return Redirect::route('administrador.almacenes.index');
     }
-    function show(){
+    public function show(){
 
     }
-    function edit($id){
-        $almacenes = Almacene::findOrfail($id);
-        return view('administrador.almacenes.edit', compact('almacenes'));
+    public function edit($id){
+        $almacene = Almacene::findOrfail($id);
+        return view('administrador.almacenes.edit', compact('almacene'));
     }
-    function update($id, Request $request){
+    public function update($id, Request $request){
         $almacene = Almacene::findOrfail($id);
         $almacene->nombre = $request->nombre;
         $almacene->observacion = $request->observacion;
@@ -38,7 +39,7 @@ class AlmaceneController extends Controller
         return Redirect::route('almacenes');
 
     }
-    function destroy($id){
+    public function destroy($id){
         $almacene = Almacene::findOrfail($id);
         $almacene->destroy();
         return Redirect::route('almecenes');
