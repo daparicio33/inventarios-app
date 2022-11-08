@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 use App\Models\Almacene;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
 class AlmaceneController extends Controller
 {
     //
+    
     function index(){
         $almacenes = Almacene::all();
          return view('administrador.almacenes.index', compact('almacenes'));
@@ -25,7 +26,7 @@ class AlmaceneController extends Controller
     function show(){
 
     }
-    function edit(){
+    function edit($id){
         $almacenes = Almacene::findOrfail($id);
         return view('administrador.almacenes.edit', compact('almacenes'));
     }
@@ -37,7 +38,7 @@ class AlmaceneController extends Controller
         return Redirect::route('almacenes');
 
     }
-    function destroy(){
+    function destroy($id){
         $almacene = Almacene::findOrfail($id);
         $almacene->destroy();
         return Redirect::route('almecenes');

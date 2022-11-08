@@ -42,7 +42,7 @@ class EncargadoController extends Controller
 
     public function edit($id){
         $encargado = Encargado::findOrFail($id);
-        $users = User::pluck('nombre','id')->toArray();
+        $users = User::pluck('name','id')->toArray();
         $cargos = Cargo::pluck('nombre','id')->toArray();
         $almacenes = Almacene::pluck('nombre','id')->toArray();
         return view('administrador.almacenes.encargados.edit',

@@ -25,7 +25,7 @@ class CargoController extends Controller
     function show(){
 
     }
-    function edit(){
+    function edit($id){
         $cargos = Cargo::findOrfail($id);
         return view('administrador.cargo.edit', compact('cargos'));
     }

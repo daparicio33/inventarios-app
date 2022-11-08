@@ -98,9 +98,8 @@ class MarcaController extends Controller
     public function destroy($id)
     {
         //
-        $marca = Marca::findOrfail($Id);
-        $marca->nombre = $request->nombre;
+        $marca = Marca::findOrfail($id);
         $marca->destroy();
-        return Redirect::route('marcas')
+        return Redirect::route('marcas');
     }
 }

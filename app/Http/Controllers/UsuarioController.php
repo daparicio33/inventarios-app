@@ -43,6 +43,7 @@ class UsuarioController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->password = $request->password;
         $user->save();
         return Redirect::route('administrador.usuarios.index');
     }
@@ -84,6 +85,9 @@ class UsuarioController extends Controller
         $user = User::findOrfail($id);
         $user->name = $request->name;
         $user->email = $request->email;
+        if(isset($request->password)){
+            $user->password = $request->password;
+        }
         $user->update();
         return Redirect::route('administrador.usuarios.index');
     }
@@ -98,7 +102,7 @@ class UsuarioController extends Controller
     {
         //
         $user = User::findOrFail($id);
-        $user->dlete();
+        $user->delete();
         return Redirect::route('administrador.usuarios.index');
     }
 }

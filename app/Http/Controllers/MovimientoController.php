@@ -129,7 +129,7 @@ class MovimientoController extends Controller
     {
         //
         $movimiento = Movimiento::findOrfail($id);
-        return view('inventarios.movimientos.edit', compact('movimientos'));
+        return view('inventarios.movimientos.edit', compact('movimiento'));
     }
 
     /**
@@ -142,7 +142,7 @@ class MovimientoController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $num = Movimiento::select('numero')->orderBy('numero','desc')
+        /* $num = Movimiento::select('numero')->orderBy('numero','desc')
         ->first();
         if (isset($num->numero)){
             $numero = $num->numero + 1;
@@ -190,10 +190,8 @@ class MovimientoController extends Controller
             ->with('error',$th->getMessage());
         }
         return Redirect::route('inventarios.movimientos.index')
-        ->with('info','movimiento guardado');
+        ->with('info','movimiento guardado'); */
     }
-    }
-
     /**
      * Remove the specified resource from storage.
      *
