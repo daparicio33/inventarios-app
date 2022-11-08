@@ -7,7 +7,7 @@
 @section('content')
     {!! Form::open(['route'=>'administrador.almacenes.encargados.store','method'=>'post','enctype'=>'multipart/form-data']) !!}
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-9">
+        <div class="col-sm-12 col-md-7 col-lg-7">
             <div class="card">
                 <div class="card-header">
                     <h5><i class="fas fa-list-alt"></i> Datos del Producto</h5>
@@ -17,27 +17,15 @@
                         <label for="">
                             <i class="fas fa-user"></i>  Nombre de usuario
                         </label>
-                        <select name="user_id" class="form-control">
-                            @foreach ($users as $user)
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
-                            @endforeach
-                        </select>
+                        {!! Form::select('user_id', $users, null, ['class'=>'form-control']) !!}
                         <label for="">
                             <i class="fab fa-black-tie"></i>  Cargo del usuario
                         </label>
-                        <select name="cargo_id" class="form-control">
-                            @foreach ($cargos as $cargo)
-                            <option value="{{ $cargo->id }}">{{ $cargo->nombre }}</option>
-                            @endforeach
-                        </select>
+                        {!! Form::select('cargo_id', $cargos, null, ['class'=>'form-control']) !!}
                         <label for="">
                             <i class="fab fa-buffer"></i>  Almacen
                         </label>
-                        <select name="almacene_id" class="form-control">
-                            @foreach ($almacenes as $almacene)
-                            <option value="{{ $almacene->id }}">{{ $almacene->nombre }}</option>
-                            @endforeach
-                        </select>
+                        {!! Form::select('almacene_id', $almacenes, null, ['class'=>'form-control']) !!}
                     </div>
                 </div>
                 <div class="card-footer">

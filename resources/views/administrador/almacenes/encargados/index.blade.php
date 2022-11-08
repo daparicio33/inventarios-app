@@ -2,7 +2,7 @@
 @section('title', 'Encargados')
 @section('content_header')
     <h1>Encargados</h1>
-    <a href="{{ route('administrador.almecenes.encargados.create') }}">
+    <a href="{{ route('administrador.almacenes.encargados.create') }}">
         <button class="btn btn-primary"> 
             <i class="fas fa-folder-open"></i> Nuevo Encargado
         </button>
@@ -24,12 +24,12 @@
                 <tr>
                     <td>{{ $encargado->user->name }}</td>
                     <td>{{ $encargado->cargo->nombre }}</td>
-                    <td>{{ $encargado->almacen->nombre }}</td>
-                    <td>
-                        <a href="{{ route('administrador.almacenes.encargados.edit',$encargado->id) }}" class="btn btn-success btn-sm">
+                    <td>{{ $encargado->almacene->nombre }}</td>
+                    <td style="width: 130px; text-align: center">
+                        <a title="editar" href="{{ route('administrador.almacenes.encargados.edit',$encargado->id) }}" class="btn btn-success">
                             <i class="far fa-edit"></i>
                         </a>
-                        <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-delete-{{ $encargado->id }}">
+                        <a title="eliminar" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $encargado->id }}">
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     </td>

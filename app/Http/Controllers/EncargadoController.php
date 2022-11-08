@@ -25,10 +25,10 @@ class EncargadoController extends Controller
 
     public function create(){
         $users = User::pluck('name','id')->toArray();
-        $cargos = Cargo::pluck('name','id')->toArray();
-        $almacenes = Almacene::pluck('name','id')->toArray();
+        $cargos = Cargo::pluck('nombre','id')->toArray();
+        $almacenes = Almacene::pluck('nombre','id')->toArray();
         return view('administrador.almacenes.encargados.create', 
-        compact('users','cargos','alamcenes'));
+        compact('users','cargos','almacenes'));
     }
 
     public function store(Request $request){

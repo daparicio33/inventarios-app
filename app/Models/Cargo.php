@@ -11,4 +11,5 @@ class Cargo extends Model
     public function encargados(){
         return $this->hasMany(Encargado::class);
     }
+    
 }
