@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Titem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class TitemController extends Controller
 {
@@ -14,6 +16,8 @@ class TitemController extends Controller
     public function index()
     {
         //
+        $titems = Titem::all();
+        return view('inventarios.titems.index',compact('titems'));
     }
 
     /**
@@ -24,6 +28,8 @@ class TitemController extends Controller
     public function create()
     {
         //
+        return view('inventarios.titems.create');
+
     }
 
     /**
@@ -35,6 +41,10 @@ class TitemController extends Controller
     public function store(Request $request)
     {
         //
+        $titem = new Titem();
+        $titem->nombre = $request->nombre;
+        $titem->save();
+        return Redirect::route('inventarios.titems.index');
     }
 
     /**
@@ -57,6 +67,8 @@ class TitemController extends Controller
     public function edit($id)
     {
         //
+        $titem = Titem::findOrfail($id);
+        return view('inventarios.titems.edit', compact('titem'));
     }
 
     /**
@@ -69,6 +81,10 @@ class TitemController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $titem = Titem::findOrfail($id);
+        $titem->nombre = $request->nombre;
+        $titem->update();
+        return Redirect::route('inventarios.titems.index');
     }
 
     /**
@@ -80,5 +96,8 @@ class TitemController extends Controller
     public function destroy($id)
     {
         //
+        $titem = Titem::findOrFail($id);
+        $titem->delete();
+        return Redirect::route('inventarios.titems.index');
     }
 }

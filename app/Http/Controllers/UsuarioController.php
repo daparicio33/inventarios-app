@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class UsuarioController extends Controller
 {
@@ -14,6 +16,8 @@ class UsuarioController extends Controller
     public function index()
     {
         //
+        $users = User::all();
+        return view('administrador.usuarios.index', compact('users'));
     }
 
     /**
@@ -24,6 +28,7 @@ class UsuarioController extends Controller
     public function create()
     {
         //
+        return view('administrador.usuarios.create');
     }
 
     /**
@@ -35,6 +40,11 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         //
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+        return Redirect::route('administrador.usuarios.index');
     }
 
     /**
@@ -57,6 +67,8 @@ class UsuarioController extends Controller
     public function edit($id)
     {
         //
+        $user = User::findOrfail($id);
+        return view('administrador.usuarios.edit', compact('user'));
     }
 
     /**
@@ -69,6 +81,11 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user = User::findOrfail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->update();
+        return Redirect::route('administrador.usuarios.index');
     }
 
     /**
@@ -80,5 +97,8 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::findOrFail($id);
+        $user->dlete();
+        return Redirect::route('administrador.usuarios.index');
     }
 }

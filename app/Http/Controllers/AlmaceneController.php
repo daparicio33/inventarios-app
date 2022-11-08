@@ -16,9 +16,9 @@ class AlmaceneController extends Controller
          return view('administrador.almacenes.create');
     }
     function store(Request $request){
-        $almacene = new Almacene();
+       $almacene = new Almacene();
         $almacene->nombre = $request->nombre;
-        $almacene->observacion = $request->observacion;
+        $almacene->observacion  = $request->observacion;
         $almacene->save();
         return Redirect::route('almacenes');
     }
