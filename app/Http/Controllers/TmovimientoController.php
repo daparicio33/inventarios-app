@@ -21,12 +21,12 @@ class TmovimientoController extends Controller
         $tmovimiento->nombre = $request->nombre;
         $tmovimiento->factor = $request->factor;
         $tmovimiento->save();
-        return Redirect::route('tmovimientos');
+        return Redirect::route('inventarios.movimientos.tmovimientos.index');
     }
     function show(){
 
     }
-    function edit(){
+    function edit($id){
         $tmovimiento = Tmovimiento::findOrfail($id);
         return view('inventarios.movimientos.tmovimientos.edit', compact('tmovimiento'));
     }
@@ -35,13 +35,13 @@ class TmovimientoController extends Controller
         $tmovimiento->nombre = $request->nombre;
         $tmovimiento->factor = $request->factor;
         $tmovimiento->update();
-        return Redirect::route('tmovimiento');
+        return Redirect::route('inventarios.movimientos.tmovimientos.index');
 
     }
-    function destroy(){
+    function destroy($id){
         $tmovimiento = Tmovimiento::findOrfail($id);
         $tmovimiento->destroy();
-        return Redirect::route('tmovimiento');
+        return Redirect::route('inventarios.movimientos.tmovimientos.index');
 
     }
 }
