@@ -4,7 +4,7 @@
  <h1 class="text-primary"><i class="fas fa-marker"></i>Editar nuevo tipo</h1>
  @stop
 @section('content')
-    {!! Form::open(['route'=>'inventarios.tmovimientos.edit','method'=>'post','enctype'=>'multipart/form-data']) !!}
+    {!! Form::open(['route'=>'inventarios.movimientos.tmovimientos.edit','method'=>'post','enctype'=>'multipart/form-data']) !!}
     <div class="row">
         <div class="col-sm-12 col-md-7 col-lg-7">
             <div class="card">
