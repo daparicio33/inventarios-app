@@ -36,13 +36,13 @@ class AlmaceneController extends Controller
         $almacene->nombre = $request->nombre;
         $almacene->observacion = $request->observacion;
         $almacene->update();
-        return Redirect::route('almacenes');
+        return Redirect::route('administrador.almacenes.index');
 
     }
     public function destroy($id){
         $almacene = Almacene::findOrfail($id);
-        $almacene->destroy();
-        return Redirect::route('almecenes');
+        $almacene->delete();
+        return Redirect::route('administrador.almacenes.index');
 
     }
 }
