@@ -1,4 +1,4 @@
-{!! form::open(['route'=>'inventarios.tmovimientos.destroy',$tmovimiento->id],'method'=>'delete') !!}
+{!! Form::open(['route'=>['inventarios.movimientos.tmovimientos.destroy', $tmovimiento->id],'method'=>'delete']) !!}
 <div class="modal faden" id="modal-delete-{{ $tmovimiento->id }}" tabbindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal dialog">
         <div class="modal-content">

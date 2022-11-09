@@ -4,7 +4,7 @@
  <h1 class="text-primary"><i class="fas fa-marker"></i>Crear nuevo tipo</h1>
  @stop
 @section('content')
-    {!! Form::open(['route'=>'inventarios.tmovimientos.store','method'=>'post','enctype'=>'multipart/form-data']) !!}
+    {!! Form::open(['route'=>'inventarios.movimientos.tmovimientos.store','method'=>'post','enctype'=>'multipart/form-data']) !!}
     <div class="row">
         <div class="col-sm-12 col-md-7 col-lg-7">
             <div class="card">
@@ -16,7 +16,7 @@
                             <label for="">
                                 <i class="fas fa-marker"></i>Nombre
                             </label>
-                            {!! Form::text('factor', null, ['class'=>'form-control']) !!}
+                            {!! Form::text('nombre', null, ['class'=>'form-control']) !!}
                         <label for="" class="mt-2">
                             <i class="fas fa-stream"></i>Factor
                         </label>
@@ -31,5 +31,5 @@
             </div>
         </div>
     </div>
-    {{  form::close()  }}
+    {!! Form::close() !!}
 @stop
