@@ -36,13 +36,13 @@ Route::resource('inventarios/marcas',MarcaController::class)
 Route::resource('inventarios/titems',TitemController::class)
 ->names('inventarios.titems');
 //rutas para los movimientos
-Route::resource('inventarios/movimientos',MovimientoController::class)
-->names('inventarios.movimientos');
+
 Route::resource('inventarios/movimientos/detalles',MovimientoDetalleController::class)
 ->names('inventarios.movimientos.detalles');
 Route::resource('inventarios/movimientos/tmovimientos',TmovimientoController::class)
 ->names('inventarios.movimientos.tmovimientos');
-
+Route::resource('inventarios/movimientos',MovimientoController::class)
+->names('inventarios.movimientos');
 
 //rutas para saber las existencias
 Route::resource('inventarios/existencias',ExistenciaController::class)

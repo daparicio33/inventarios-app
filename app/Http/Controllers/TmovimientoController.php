@@ -40,7 +40,7 @@ class TmovimientoController extends Controller
     }
     function destroy($id){
         $tmovimiento = Tmovimiento::findOrfail($id);
-        $tmovimiento->destroy();
+        $tmovimiento->delete();
         return Redirect::route('inventarios.movimientos.tmovimientos.index');
 
     }
