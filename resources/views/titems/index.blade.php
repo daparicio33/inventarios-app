@@ -12,7 +12,7 @@
     width: 10px;
  }
  .td2{
-    width: 20px;
+    width: 21px;
  }
  h3{
     font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
