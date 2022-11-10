@@ -331,13 +331,46 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
+            'text'=>'ADMINISTRADOR',
+            'icon'=>'fas fa-users-cog',
+            'submenu'=>[
+                [
+                    'text'=>'Almacenes',
+                    'icon'=>'fas fa-store',
+                    'submenu'=>[
+                        [
+                            'text'=>'Almacen',
+                            'icon'=>'fas fa-store',
+                            'route'=>'administrador.almacenes.index'
+                        ],
+                        [
+                            'text'=>'Encargados',
+                            'icon'=>'fas fa-user-tag',
+                            'route'=>'administrador.almacenes.encargados.index'
+                        ]
+                    ]
+                ],
+            ],
+        ],
+        [
             'text'=>'INVENTARIOS',
             'icon'=>'fas fa-truck-moving',
             'submenu'=>[
                 [
                     'text'=>'Movimientos',
                     'icon'=>'fas fa-people-carry',
-                    'route'=>'inventarios.movimientos.index'
+                    'submenu'=>[
+                        [
+                            'text'=>'Movimientos',
+                            'icon'=>'fas fa-suitcase',
+                            'route'=>'inventarios.movimientos.index'
+                        ],
+                        [
+                            'text'=>'Tipos',
+                            'icon'=>'fas fa-text-height',
+                            'route'=>'inventarios.movimientos.tmovimientos.index'
+                        ]
+                    ],
                 ],
                 [
                     'text'=>'Items',

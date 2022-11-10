@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\AlmaceneController;
+use App\Http\Controllers\EncargadoController;
 use App\Http\Controllers\ExistenciaController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MovimientoController;
 use App\Http\Controllers\MovimientoDetalleController;
 use App\Http\Controllers\TitemController;
-use App\Models\Titem;
+use App\Http\Controllers\TmovimientoController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,16 +36,28 @@ Route::resource('inventarios/marcas',MarcaController::class)
 Route::resource('inventarios/titems',TitemController::class)
 ->names('inventarios.titems');
 //rutas para los movimientos
-Route::resource('inventarios/movimientos',MovimientoController::class)
-->names('inventarios.movimientos');
+
 Route::resource('inventarios/movimientos/detalles',MovimientoDetalleController::class)
 ->names('inventarios.movimientos.detalles');
+Route::resource('inventarios/movimientos/tmovimientos',TmovimientoController::class)
+->names('inventarios.movimientos.tmovimientos');
+Route::resource('inventarios/movimientos',MovimientoController::class)
+->names('inventarios.movimientos');
+
 //rutas para saber las existencias
 Route::resource('inventarios/existencias',ExistenciaController::class)
 ->names('inventarios.existencias');
+//Rutas para administrador
+
+Route::resource('administrador/almacenes/encargados',EncargadoController::class)
+->names('administrador.almacenes.encargados');
+Route::resource('administrador/almacenes',AlmaceneController::class)
+->names('administrador.almacenes');
+
 
 Route::get('clear-cache',function(){
    echo Artisan::call('cache:clear');
    echo Artisan::call('config:clear');
    echo Artisan::call('config:cache');
+   echo Artisan::call('route:cache');
 });
