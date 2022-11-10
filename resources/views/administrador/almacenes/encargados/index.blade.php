@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'Encargados')
 @section('content_header')
-    <h1>Encargados</h1>
+<h1><i class="fab fa-black-tie"></i> Encargados</h1>
     <a href="{{ route('administrador.almacenes.encargados.create') }}">
         <button class="btn btn-primary"> 
             <i class="fas fa-folder-open"></i> Nuevo Encargado
@@ -11,13 +11,13 @@
 @stop
 
 @section('content')
-    <p>Lista de encargados</p>
+    <h3><p>Lista de encargados</p></h3>
     <table class="table">
         <thead>
             <tr>
-                <th>Nombre de usuario</th>
-                <th>Cargo de usuario</th>
-                <th>Almacen</th>
+                <th><i class="fas fa-user"></i>  Nombre de usuario</th>
+                <th><i class="fab fa-black-tie"></i>  Cargo del usuario</th>
+                <th><i class="fab fa-buffer"></i>  Almacen</th>
             </tr>
         </thead>
         <tbody>
