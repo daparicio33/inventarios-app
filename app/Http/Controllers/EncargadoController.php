@@ -19,7 +19,7 @@ class EncargadoController extends Controller
 
     public function index (){
         $encargados = Encargado::all();
-        return  view('administrador.almacenes.encargados.index', 
+        return  view('administrador.almacenes.encargados.index',
         compact('encargados'));
     }
 
@@ -27,17 +27,28 @@ class EncargadoController extends Controller
         $users = User::pluck('name','id')->toArray();
         $cargos = Cargo::pluck('nombre','id')->toArray();
         $almacenes = Almacene::pluck('nombre','id')->toArray();
-        return view('administrador.almacenes.encargados.create', 
+        return view('administrador.almacenes.encargados.create',
         compact('users','cargos','almacenes'));
     }
 
     public function store(Request $request){
-        $encargado = new Encargado;
-        $encargado->user_id= $request->user_id;
-        $encargado->cargo_id= $request->cargo_id;
-        $encargado->almacene_id= $request->almacene_id;
-        $encargado->save();
-        return Redirect::route('administrador.almacenes.encargados.index');
+        try {
+            //code...
+            DB::beginTransaction();
+            $encargado = new Encargado;
+            $encargado->user_id= $request->user_id;
+            $encargado->cargo_id= $request->cargo_id;
+            $encargado->almacene_id= $request->almacene_id;
+            $encargado->save();
+            DB::commit();
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollback();
+            return Redirect::route('administrador.almacenes.encargados.index')
+            ->with('error','ocurrio un error cuando se intento guardar los datos del encargado');
+        }
+        return Redirect::route('administrador.almacenes.encargados.index')
+        ->with('info','se guardo los datos del encargado correctamente');
     }
 
     public function edit($id){
@@ -50,18 +61,37 @@ class EncargadoController extends Controller
     }
 
     public function update (Request $request, $id){
-        $encargado = Encargado::findOrFail($id);
-        $encargado->user_id = $request->user_id;
-        $encargado->cargo_id = $request->cargo_id;
-        $encargado->almacene_id = $request->almacene_id;
-        $encargado->update();
-        return Redirect::route('administrador.almacenes.encargados.index');
+        try {
+            //code...
+            DB::beginTransaction();
+                $encargado = Encargado::findOrFail($id);
+                $encargado->user_id = $request->user_id;
+                $encargado->cargo_id = $request->cargo_id;
+                $encargado->almacene_id = $request->almacene_id;
+                $encargado->update();
+            DB::commit();
+        } catch (\Throwable $th) {
+            //throw $th
+            DB::rollback();
+            return Redirect::route('administrador.almacenes.encargados.index')
+            ->with('error','ocurrio un error cuando se intento guardar los datos del encargado');
+        }
+        return Redirect::route('administrador.almacenes.encargados.index')
+        ->with('info','se actualizo los tados del encargado correctamente');
     }
 
     public function destroy($id){
-        $encargado = Encargado::findOrFail($id);
-        $encargado->delete();
-        return Redirect::route('administrador.almacenes.encargados.index');
+        try {
+            //code...
+            $encargado = Encargado::findOrFail($id);
+            $encargado->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
+            return Redirect::route('administrador.almacenes.encargados.index')
+            ->with('error','no se pudo eliminar registro del encargado');
+        }
+        return Redirect::route('administrador.almacenes.encargados.index')
+        ->with('info','se elimino el registro del encargado corrcetamante');
     }
 
 }

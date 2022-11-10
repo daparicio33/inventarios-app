@@ -45,11 +45,21 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $marca = new Marca();
-        $marca->nombre = $request->nombre;
-        $marca->save();
-        return Redirect::route('marcas');
+        try {
+            //code...
+            DB::beginTransaction();
+            $marca = new Marca();
+            $marca->nombre = $request->nombre;
+            $marca->save();
+            DB::commit();
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollback();
+            return Redirect::route('inventarios.marcas.index')
+            ->with('error','ocurrio un error cuando se intento guardar los datos');
+        }
+        return Redirect::route('inventarios.marcas.index')
+        ->with('info','se guardo los datos de marcas correctamente');
     }
 
     /**
@@ -85,11 +95,21 @@ class MarcaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $marca = Marca::findOrfail($id);
-        $marca->nombre = $request->nombre;
-        $marca->update();
-        return Redirect::route('marcas');
+        try {
+            //code...
+            DB::beginTransaction();
+            $marca = Marca::findOrfail($id);
+            $marca->nombre = $request->nombre;
+            $marca->update();
+            DB::commit();
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollback();
+            return Redirect::route('inventarios.marcas.index')
+            ->with('error','ocurrio un error cuando se intento guardar los datos');
+        }
+        return Redirect::route('inventarios.marcas.index')
+        ->with('info','se actualizo los datos de marca correctamente');
 
     }
 
@@ -101,9 +121,16 @@ class MarcaController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $marca = Marca::findOrfail($id);
-        $marca->destroy();
-        return Redirect::route('marcas');
+        try {
+            //code...
+            $marca = Marca::findOrfail($id);
+            $marca->destroy();
+        } catch (\Throwable $th){
+            //throw $th;
+            return Redirect::route('inventarios.marcas.index')
+            ->with('error','no se puede eliminar el registo de marca');
+        }
+        return Redirect::route('inventarios.marcas.index')
+        ->with('info','se elimino el registro marca correctamente');
     }
 }

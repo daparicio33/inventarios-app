@@ -13,7 +13,7 @@ class AlmaceneController extends Controller
     {
         return $this->middleware('auth');
     }
-    
+
     public function index(){
         $almacenes = Almacene::all();
          return view('administrador.almacenes.index', compact('almacenes'));
