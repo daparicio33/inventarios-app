@@ -4,7 +4,7 @@
 <h1 class="text-primary"><i class="fas fa-marker"></i>Editar cargo</h1>
 @stop
 @section('content')
-{!! Form::model($cargo,['route'=>['administrador.cargos.update',$cargo->nombre],'method'=>'put']) !!}
+{!! Form::model($cargo,['route'=>['administrador.cargos.update',$cargo->id],'method'=>'put']) !!}
 <div class="row">
     <div class="col-sm-12 col-md-7 col-lg-7">
         <div class="card">

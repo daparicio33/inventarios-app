@@ -14,14 +14,14 @@ class TmovimientoController extends Controller
     {
         return $this->middleware('auth');
     }
-    function index(){
+    public function index(){
         $tmovimientos = Tmovimiento::all();
          return view('inventarios.movimientos.tmovimientos.index', compact('tmovimientos'));
     }
-    function create(){
+    public function create(){
         return view('inventarios.movimientos.tmovimientos.create');
     }
-    function store(Request $request){
+    public function store(Request $request){
         try{
             //code...
             DB::beginTransaction();
@@ -41,14 +41,14 @@ class TmovimientoController extends Controller
         ->with('info','se guardo los datos correctamente de tmovimiento');
 
     }
-    function show(){
+    public function show(){
 
     }
-    function edit($id){
+    public function edit($id){
         $tmovimiento = Tmovimiento::findOrfail($id);
         return view('inventarios.movimientos.tmovimientos.edit', compact('tmovimiento'));
     }
-    function update($id, Request $request){
+    public function update($id, Request $request){
         try {
             //code...
             DB::beginTransaction();
@@ -69,7 +69,7 @@ class TmovimientoController extends Controller
         ->with('info','se actualizo los datos correctamente de tmovimiento');
 
     }
-    function destroy($id){
+    public function destroy($id){
         try {
             //code...
             $tmovimiento = Tmovimiento::findOrfail($id);

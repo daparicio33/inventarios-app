@@ -14,14 +14,14 @@ class CargoController extends Controller
     {
         return $this->middleware('auth');
     }
-    function index(){
+    public function index(){
         $cargos = Cargo::all();
         return view('administrador.cargos.index', compact('cargos'));
     }
-    function create(){
+    public function create(){
          return view('administrador.cargos.create');
     }
-    function store(Request $request){
+    public function store(Request $request){
         try {
             //code...
             DB::beginTransaction();
@@ -38,14 +38,14 @@ class CargoController extends Controller
         return Redirect::route('administrador.cargos.index')
         ->with('info','seguardo correctamente los datos del cargo');
     }
-    function show(){
+    public function show(){
 
     }
-    function edit($id){
-        $cargos = Cargo::findOrfail($id);
-        return view('administrador.cargo.edit', compact('cargos'));
+    public function edit($id){
+        $cargo = Cargo::findOrfail($id);
+        return view('administrador.cargos.edit', compact('cargo'));
     }
-    function update($id, Request $request){
+    public function update($id, Request $request){
         try {
             //code...
             DB::beginTransaction();
@@ -63,11 +63,11 @@ class CargoController extends Controller
         ->with('info','seguardo correctamente los datos del cargo');
 
     }
-    function destroy($id){
+    public function destroy($id){
         try {
             //code...
             $cargo = Cargo::findOrfail($id);
-            $cargo->destroy();
+            $cargo->delete();
         } catch (\Throwable $th) {
             //throw $th;
             return Redirect::route('administrador.cargos.index')
