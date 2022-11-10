@@ -18,6 +18,10 @@ class MovimientoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        return $this->middleware('auth');
+    }
     public function index()
     {
         //
@@ -57,6 +61,13 @@ class MovimientoController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'tmovimiento_id'=>'required',
+            'fecha'=>'required',
+            'hora'=>'required',
+            'cliente_id'=>'required',
+            'items_id'=>'required'
+        ]);
         $num = Movimiento::select('numero')->orderBy('numero','desc')
         ->first();
         if (isset($num->numero)){

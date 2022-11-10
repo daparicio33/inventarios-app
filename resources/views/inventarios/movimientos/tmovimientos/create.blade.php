@@ -21,6 +21,10 @@
                             <i class="fas fa-stream"></i>Factor
                         </label>
                         {!! Form::text('factor', null, ['class'=>'form-control']) !!}
+                        <label for="">
+                            <i class="fas fa-stream"></i>Administrador
+                        </label>
+                        {!! Form::select('administrador', $sino, null, ['class'=>'form-control']) !!}
                         </div>
                     </div>
             </div>

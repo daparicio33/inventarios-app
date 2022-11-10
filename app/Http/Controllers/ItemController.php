@@ -16,6 +16,10 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        return $this->middleware('auth');
+    }
     public function index()
     {
         //
@@ -49,6 +53,9 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         //
+        $validate = $request->validate([
+            'descripcion'=>'required'
+        ]);
         try {
             //code...
             $item = new Item();
@@ -115,6 +122,9 @@ class ItemController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validate = $request->validate([
+            'descripcion'=>'required'
+        ]);
         try {
             //code...
             $item = Item::findOrFail($id);

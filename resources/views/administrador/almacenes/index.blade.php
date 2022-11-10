@@ -1,8 +1,15 @@
 @extends('adminlte::page')
 @section('title', 'Almacenes')
 @section('content_header')
-<h1>Almacenes</h1>
-<a href="{{ route('administrador.almacenes.create') }}"><button class="btn btn-primary"><i class="fas fa-plus"></i> Nuevo almacen</button></a>
+    <h1>Almacenes</h1>
+    <a href="{{ route('administrador.almacenes.create') }}">
+        <button class="btn btn-primary">
+            <i class="fas fa-plus"></i> Nuevo almacen
+        </button>
+    </a>
+    @include('layouts.info')
+@endsection
+@section('content')
 <div class="table-responvise">
 <table class="table">
     <thead>
@@ -30,4 +37,4 @@
     </tbody>
 </table>
 </div>
-@endsection
+@stop

@@ -302,15 +302,15 @@ return [
         ],
 
         // Sidebar items:
-        [
+        /* [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
-        ],
-        [
+        ], */
+        /* [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
-        ],
+        ], */
         /* [
             'text'        => 'pages',
             'url'         => 'admin/pages',
@@ -322,14 +322,14 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => 'admin/settings',
+            'route'  => 'user.settings',
             'icon' => 'fas fa-fw fa-user',
         ],
-        [
+        /* [
             'text' => 'change_password',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
-        ],
+        ], */
         [
             'text'=>'ADMINISTRADOR',
             'icon'=>'fas fa-users-cog',
@@ -347,9 +347,14 @@ return [
                             'text'=>'Encargados',
                             'icon'=>'fas fa-user-tag',
                             'route'=>'administrador.almacenes.encargados.index'
-                        ]
+                        ],
                     ]
                 ],
+                [
+                    'text'=>'Cargos',
+                    'icon'=>'fas fa-truck',
+                    'route'=>'administrador.cargos.index'
+                ]
             ],
         ],
         [
@@ -433,7 +438,7 @@ return [
                 ],
             ],
         ], */
-        ['header' => 'labels'],
+        /* ['header' => 'labels'],
         [
             'text'       => 'important',
             'icon_color' => 'red',
@@ -448,7 +453,7 @@ return [
             'text'       => 'information',
             'icon_color' => 'cyan',
             'url'        => '#',
-        ],
+        ], */
     ],
 
     /*

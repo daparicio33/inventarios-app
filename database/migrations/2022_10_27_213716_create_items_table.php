@@ -15,7 +15,7 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo')->unique();
+            $table->string('codigo')->nullable();
             $table->string('descripcion');
             $table->unsignedBigInteger('marca_id');
             $table->unsignedBigInteger('titem_id');
