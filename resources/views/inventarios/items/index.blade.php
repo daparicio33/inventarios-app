@@ -7,6 +7,7 @@
             <i class="fas fa-folder-open"></i> Nuevo Item
         </button>
     </a>
+    
 @stop
 @section('content')
     <p>Lista de Items del sistema.</p>
