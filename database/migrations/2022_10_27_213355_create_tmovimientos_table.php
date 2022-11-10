@@ -17,6 +17,7 @@ class CreateTmovimientosTable extends Migration
             $table->id();
             $table->string('nombre')->unique();
             $table->integer('factor');
+            $table->string('administrador');
             $table->timestamps();
         });
     }

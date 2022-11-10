@@ -16,3 +16,7 @@ function almacen(){
     $id = User::findOrFail(auth()->id());
     return $id->encargado->almacene_id;
 }
+function sino(){
+    $ar = [['administrador'=>'si'],['administrador'=>'no']];
+    return $ar;
+}

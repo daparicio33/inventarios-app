@@ -21,6 +21,9 @@
                             <i class="fas fa-stream"></i> Descripcion
                         </label>
                         {!! Form::textarea('descripcion', null, ['class'=>'form-control', 'rows'=>'3']) !!}
+                        @error('descripcion')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                         <div class="row mt-2" id="marcatipo">
                             <div class="col-sm-12 col-md-6">
                                 <label for="">

@@ -9,12 +9,17 @@ use Illuminate\Support\Facades\Redirect;
 class TmovimientoController extends Controller
 {
     //
+    public function __construct()
+    {
+        return $this->middleware('auth');
+    }
     function index(){
         $tmovimientos = Tmovimiento::all();
          return view('inventarios.movimientos.tmovimientos.index', compact('tmovimientos'));
     }
     function create(){
-         return view('inventarios.movimientos.tmovimientos.create');
+        $sino = sino();
+        return view('inventarios.movimientos.tmovimientos.create',compact('sino'));
     }
     function store(Request $request){
         $tmovimiento = new Tmovimiento();

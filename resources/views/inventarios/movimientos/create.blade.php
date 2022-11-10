@@ -5,7 +5,12 @@
     <p>registrar el movimiento del inventario</p>
 @stop
 @section('content')
-
+<div class="row">
+    <div class="col-sm-12">
+        @include('inventarios.movimientos.search')
+    </div>
+</div>
+{!! Form::open(['route'=>'inventarios.movimientos.store','method'=>'post']) !!}   
 <div class="row">
     {{-- encabezados del formulario --}}
     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -14,8 +19,7 @@
                 <h5>Datos</h5>
             </div>
             <div class="card-body">
-                @include('inventarios.movimientos.search')
-{!! Form::open(['route'=>'inventarios.movimientos.store','method'=>'post']) !!}                
+             
                 {{-- datos del cliente --}}
                 @if (isset($cliente)) 
                     <input type="hidden" value="{{ $cliente->idCliente }}" name="cliente_id">
@@ -47,6 +51,7 @@
                     <div class="col-sm-12 col-md-3 col-lg-3">
                         <label for="">F Entrega</label>
                         {!! Form::date('fecha', null, ['class'=>'form-control']) !!}
+                        <small class="text-danger">@error('fecha') {{ $message }} @enderror</small>
                     </div>
                     <div class="col-sm-12 col-md-3 col-lg-3">
                         <label for="">F Regreso</label>
@@ -55,6 +60,7 @@
                     <div class="col-sm-12 col-md-3 col-lg-3">
                         <label for="">Hora</label>
                         {!! Form::time('hora', null, ['class'=>'form-control']) !!}
+                        <small class="text-danger">@error('hora') {{ $message }} @enderror</small>
                     </div>
                     <div class="col-sm-12 col-md-3 col-lg-3">
                         <label for="">T. Movimiento</label>
@@ -69,6 +75,7 @@
         <div class="card">
             <div class="card-header">
                 <h5>Lista de Items</h5>
+                <small class="text-danger">@error('items_id') {{ $message }} @enderror</small>
             </div>
             <div class="card-body">
                 <div class="input-group">
