@@ -11,7 +11,6 @@
 .td1{
     width:5%;
     text-align: center;
-    background-color: rgba(135, 207, 19, 0.582);
 }
  h3{
     font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -38,9 +37,6 @@
  }
  #nuevo{
     margin-bottom: 20px;
- }
- thead{
-    background-color: rgba(99, 233, 10, 0.582);
  }
 </style>
 <div class="container">
