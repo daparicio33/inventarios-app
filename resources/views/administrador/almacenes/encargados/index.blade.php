@@ -7,6 +7,7 @@
             <i class="fas fa-folder-open"></i> Nuevo Encargado
         </button>
     </a>
+    @include('layouts.info')
 @stop
 
 @section('content')
@@ -32,8 +33,10 @@
                         <a title="eliminar" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $encargado->id }}">
                             <i class="fas fa-trash-alt"></i>
                         </a>
+                        
                     </td>
                 </tr>
+                @include('administrador.almacenes.encargados.modal')
             @endforeach
         </tbody>
     </table>
