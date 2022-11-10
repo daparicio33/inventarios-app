@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Marca;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class MarcaController extends Controller
@@ -82,8 +83,8 @@ class MarcaController extends Controller
     public function edit($id)
     {
         //
-        $marcas = Marca::findOrfail($id);
-        return view('inventarios.marcas.edit', compact('marcas'));
+        $marca = Marca::findOrfail($id);
+        return view('inventarios.marcas.edit', compact('marca'));
     }
 
     /**
@@ -124,7 +125,7 @@ class MarcaController extends Controller
         try {
             //code...
             $marca = Marca::findOrfail($id);
-            $marca->destroy();
+            $marca->delete();
         } catch (\Throwable $th){
             //throw $th;
             return Redirect::route('inventarios.marcas.index')
