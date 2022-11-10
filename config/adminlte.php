@@ -354,6 +354,11 @@ return [
                     'text'=>'Cargos',
                     'icon'=>'fas fa-truck',
                     'route'=>'administrador.cargos.index'
+                ],
+                [
+                    'text'=>'Usuarios',
+                    'icon'=>'fas fa-users',
+                    'route'=>'administrador.usuarios.index',
                 ]
             ],
         ],
