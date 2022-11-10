@@ -24,7 +24,10 @@
                         <label for="">
                             <i class="fas fa-stream"></i>Administrador
                         </label>
-                        {!! Form::select('administrador', $sino, null, ['class'=>'form-control']) !!}
+                        <select name="administrador" class="form-control">
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                        </select>
                         </div>
                     </div>
             </div>

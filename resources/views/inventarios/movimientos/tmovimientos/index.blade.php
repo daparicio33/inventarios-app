@@ -14,6 +14,7 @@
             <tr>
                 <th>Nombre</th>
                 <th>Factor</th>
+                <th>Administrador</th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +22,7 @@
                 <tr>
                     <td>{{ $tmovimiento->nombre }}</td>
                     <td>{{ $tmovimiento->factor }}</td>
+                    <td>{{ $tmovimiento->administrador }}</td>
                     <td>
                         <a href="{{ route('inventarios.movimientos.tmovimientos.edit', $tmovimiento->id) }}">
                             <button class="btn btn-primary">

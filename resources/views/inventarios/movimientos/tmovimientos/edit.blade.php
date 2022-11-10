@@ -22,6 +22,13 @@
                             <i class="fas fa-stream"></i>Factor
                         </label>
                         {!! Form::number('factor', null, ['class'=>'form-control',]) !!}
+                        <label for="">
+                            <i class="fas fa-stream"></i>Administrador
+                        </label>
+                        <select name="administrador" class="form-control">
+                            <option value="SI" @if($tmovimiento->administrador == "SI") selected @endif>SI</option>
+                            <option value="NO" @if($tmovimiento->administrador == "NO") selected @endif>NO</option>
+                        </select>
                         </div>
                     </div>
             </div>

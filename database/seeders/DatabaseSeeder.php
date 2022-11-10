@@ -171,10 +171,10 @@ class DatabaseSeeder extends Seeder
             'almacene_id'=>$almacen->id
         ]);
         //tipos de movimientos
-        Tmovimiento::create(['nombre'=>'Ingreso','factor'=>1,'administrador'=>'si']);
-        Tmovimiento::create(['nombre'=>'Reposicion','factor'=>1,'administrador'=>'si']);
-        Tmovimiento::create(['nombre'=>'Perdida','factor'=>-1,'administrador'=>'si']);
-        Tmovimiento::create(['nombre'=>'Prestamo','factor'=>-1,'administrador'=>'no']);
-        Tmovimiento::create(['nombre'=>'Devolucion','factor'=>1,'administrador'=>'si']);
+        Tmovimiento::create(['nombre'=>'Ingreso','factor'=>1,'administrador'=>'SI']);
+        Tmovimiento::create(['nombre'=>'Reposicion','factor'=>1,'administrador'=>'SI']);
+        Tmovimiento::create(['nombre'=>'Perdida','factor'=>-1,'administrador'=>'SI']);
+        Tmovimiento::create(['nombre'=>'Prestamo','factor'=>-1,'administrador'=>'NO']);
+        Tmovimiento::create(['nombre'=>'Devolucion','factor'=>1,'administrador'=>'SI']);
     }
 }

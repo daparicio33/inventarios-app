@@ -19,8 +19,7 @@ class TmovimientoController extends Controller
          return view('inventarios.movimientos.tmovimientos.index', compact('tmovimientos'));
     }
     function create(){
-        $sino = sino();
-        return view('inventarios.movimientos.tmovimientos.create',compact('sino'));
+        return view('inventarios.movimientos.tmovimientos.create');
     }
     function store(Request $request){
         try{
@@ -29,6 +28,7 @@ class TmovimientoController extends Controller
             $tmovimiento = new Tmovimiento();
             $tmovimiento->nombre = $request->nombre;
             $tmovimiento->factor = $request->factor;
+            $tmovimiento->administrador = $request->administrador;
             $tmovimiento->save();
             DB::commit();
         } catch (\Throwable $th){
@@ -55,6 +55,7 @@ class TmovimientoController extends Controller
                 $tmovimiento = Tmovimiento::findOrfail($id);
                 $tmovimiento->nombre = $request->nombre;
                 $tmovimiento->factor = $request->factor;
+                $tmovimiento->administrador = $request->administrador;
                 $tmovimiento->update();
             DB::commit();
         } catch (\Throwable $th) {
