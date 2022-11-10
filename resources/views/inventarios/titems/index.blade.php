@@ -5,43 +5,39 @@
 @stop
 @section('content')
 <style>
- .td{
-    width: 80%;
- }
-.td1{
-    width:5%;
-    text-align: center;
-    background-color: rgba(135, 207, 19, 0.582);
-}
- h3{
-    font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: rgba(17, 17, 199, 0.726);
- }
- button{
-    margin-bottom: 10px;
-    margin-top: 3px;
- }
- label{
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
- }
- #crear{
-    background-color: rgba(0, 81, 255, 0.89);
-    color: white;
- }
- #editar{
-    color: white;
-    background-color: rgb(3, 85, 21);
- }
- #eliminar{
-    color: white;
-    background-color: red;
- }
- #nuevo{
-    margin-bottom: 20px;
- }
- thead{
-    background-color: rgba(99, 233, 10, 0.582);
- }
+    .td{
+        width: 80%;
+        text-align: left;
+    }
+    .td i{
+        margin-right: 7px;
+    }
+    .td1{
+        width:5%;
+        text-align: center;
+    }
+    h3{
+        font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: rgba(17, 17, 199, 0.726);
+    }
+    button{
+        margin-bottom: 10px;
+        margin-top: 3px;
+    }
+    label{
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    #crear{
+        color: white;
+    }
+    #editar{
+        color: white; }
+    #eliminar{
+        color: white;
+    }
+    #nuevo{
+        margin-bottom: 20px;
+    }
 </style>
 <div class="container">
     <div class="row">
@@ -61,7 +57,7 @@
                     <thead class="text-center">
                         <tr>
                             <th class="td1"><i class="fas fa-list-ol"></i></th>
-                            <th class="td">Nombre</th>
+                            <th class="td"><i class="fas fa-toolbox"></i>Nombre</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>

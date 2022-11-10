@@ -3,8 +3,8 @@
     <div class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" id="modaldelete{{ $titem->id }}">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div id="eliminar" class="modal-header">
-                    <h4>Eliminar</h4>
+                <div id="eliminar" class="modal-header btn btn-danger">
+                    <h4><i class="fas fa-trash"></i> Eliminar</h4>
                     <button class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
