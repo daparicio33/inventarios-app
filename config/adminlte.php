@@ -404,7 +404,17 @@ return [
                 ],
             ]
         ],
-        
+        [
+            'text'=>'ALAMCENERO',
+            'icon'=>'fas fa-users',
+            'submenu'=>[
+                [
+                    'text'=>'Registros',
+                    'icon'=>'fas fa-cash-register',
+                    'route'=>'almaceneros.index'
+                ]
+            ]
+        ],
         /* [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',

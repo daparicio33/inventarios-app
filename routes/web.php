@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlmaceneController;
+use App\Http\Controllers\AlmaceneroController;
 use App\Http\Controllers\CargoController;
 use App\Http\Controllers\EncargadoController;
 use App\Http\Controllers\ExistenciaController;
@@ -34,6 +35,10 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('user/settings',function(){
    return Redirect::route('administrador.usuarios.edit',auth()->id());
 })->name('user.settings');
+
+//rutas para el almacenero
+Route::resource('almaceneros',AlmaceneroController::class)
+->names('almaceneros');
 
 //rutas para los items
 Route::resource('inventarios/items',ItemController::class)
