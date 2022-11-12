@@ -58,6 +58,11 @@ Route::resource('inventarios/movimientos',MovimientoController::class)
 //rutas para saber las existencias
 Route::resource('inventarios/existencias',ExistenciaController::class)
 ->names('inventarios.existencias');
+
+
+
+
+
 //Rutas para administrador
 Route::resource('administrador/almacenes/encargados',EncargadoController::class)
 ->names('administrador.almacenes.encargados');
