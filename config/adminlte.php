@@ -541,6 +541,21 @@ return [
                 ],
             ],
         ],
+        'switch'=>[
+            'active'=>'true',
+            'files'=>[
+                [
+                    'type'=>'js',
+                    'asset'=>'true',
+                    'location'=>'vendor/bootstrap-switch/js/bootstrap-switch.min.js',
+                ],
+                [
+                    'type'=>'css',
+                    'asset'=>'true',
+                    'location'=>'vendor/bootstrap-switch/css/bootstrap-switch.min.css',
+                ]
+            ],
+        ],
         'Chartjs' => [
             'active' => false,
             'files' => [

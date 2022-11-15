@@ -1,4 +1,4 @@
-{!! Form::open(['route'=>'inventarios.movimientos.create','method'=>'get','role'=>'search']) !!}
+{!! Form::open(['route'=>'almaceneros.create','method'=>'get','role'=>'search']) !!}
 <div class="input-group mb-3">
     <input type="text" name="searchText" class="form-control" 
     placeholder="ingrese DNI" aria-label="Recipient's username" aria-describedby="button-addon2"

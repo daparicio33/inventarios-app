@@ -62,7 +62,19 @@ class ExistenciaController extends Controller
             ->get();
             return view('inventarios.existencias.ingresos',compact('items'));
         }
-        
+        if ($tipo == 'reposicion'){
+            $items = Item::orderBy('id','desc')
+            ->where('item_id','=',null)
+            ->get();
+            return view('inventarios.existencias.reposiciones',compact('items'));
+        }
+
+        if ($tipo == 'perdida'){
+            $items = Item::orderBy('id','desc')
+            ->where('item_id','=',null)
+            ->get();
+            return view('inventarios.existencias.perdidas',compact('items'));
+        }
     }
 
     /**

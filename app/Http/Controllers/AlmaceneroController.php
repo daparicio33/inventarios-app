@@ -7,6 +7,7 @@ use App\Models\Item;
 use App\Models\Movimiento;
 use App\Models\MovimientoDetalle;
 use App\Models\Tmovimiento;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -26,6 +27,8 @@ class AlmaceneroController extends Controller
     {
         //
         $movimientos = Movimiento::orderBy('id','desc')
+        ->whereRelation('tmovimiento','nombre','Prestamo')
+        ->orWhereRelation('tmovimiento','nombre','Devolucion')
         ->where('almacene_id','=',almacen())
         ->get();
         return view('almaceneros.index',compact('movimientos'));
@@ -86,6 +89,7 @@ class AlmaceneroController extends Controller
             $movimiento->numero = $numero;
             $movimiento->fdevolucion = $request->fdevolucion;
             $movimiento->cliente_id = $request->cliente_id;
+            $movimiento->user_id = auth()->id();
             $movimiento->almacene_id = almacen();
             $movimiento->save();
             $rows = count($request->items_id);
@@ -113,10 +117,10 @@ class AlmaceneroController extends Controller
             //throw $th;
             DB::rollBack();
             dd($th->getMessage());
-            return Redirect::route('inventarios.movimientos.index')
+            return Redirect::route('almaceneros.index')
             ->with('error',$th->getMessage());
         }
-        return Redirect::route('inventarios.movimientos.index')
+        return Redirect::route('almaceneros.index')
         ->with('info','movimiento guardado');
     }
 
@@ -163,5 +167,37 @@ class AlmaceneroController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function devoluciones(Request $request,$id){
+        dd($request);
+        try {
+            $fecha = Carbon::now();
+            //code...
+            $num = Movimiento::select('numero')->orderBy('numero','desc')
+            ->first();
+            if (isset($num->numero)){
+                $numero = $num->numero + 1;
+            }else{
+                $numero = 1;
+            }
+            DB::beginTransaction();
+                $prestado = Movimiento::findOrFail($id);
+                $devuelto = new Movimiento();
+                $devuelto->numero = $numero;
+                $devuelto->fecha = $fecha;
+                $devuelto->tmovimiento_id = Tmovimiento::where('nombre','Devolucion')->first()->id;
+                $devuelto->cliente_id = $prestado->cliente_id;
+                $devuelto->almacene_id = $prestado->almacene_id;
+                $devuelto->movimiento_id = $prestado->id;
+                $devuelto->save();
+                $prestado->movimiento_id = $devuelto->id;
+                $prestado->update();
+                //iniciamos con los detalles
+            DB::commit();
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            dd($th->getMessage());
+        }
     }
 }

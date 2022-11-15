@@ -19,6 +19,7 @@
                 <th>Hora</th>
                 <th>Cliente</th>
                 <th>Usuario</th>
+                <th>F. Devolucion</th>
                 <th></th>
             </tr>
         </thead>
@@ -29,21 +30,25 @@
                     <td>{{ $movimiento->tmovimiento->nombre }}</td>
                     <td>{{ date('d-M-Y',strtotime($movimiento->fecha)) }}</td>
                     <td>{{ $movimiento->hora }}</td>
-                    <td>Nombre de Cliente</td>
-                    <td>correo@idexperujapon.edu.pe</td>
+                    <td>{{ $movimiento->cliente->apellido }}, {{ $movimiento->cliente->nombre }}</td>
+                    <td>{{ $movimiento->user->email }}</td>
+                    <td>{{ date('d-M-Y',strtotime($movimiento->fdevolucion)) }}</td>
                     <td style="text-align: center; width: 160px">
-                        <a data-toggle="modal" data-target="#modal-mostrar-{{ $movimiento->id }}"  title="mostrar" class="btn btn-info btn-sm">
+                        <a data-toggle="modal" data-target="#modal-devolucion-{{ $movimiento->id }}" title="registrar devolucion" class="btn btn-success">
+                            <i class="fas fa-undo-alt"></i>
+                        </a>
+                        <a data-toggle="modal" data-target="#modal-mostrar-{{ $movimiento->id }}"  title="mostrar" class="btn btn-info">
                             <i class="fas fa-eye"></i>
                         </a>
-                        <a href="" class="btn btn-warning btn-sm" title="imprimir">
+                        <a href="" class="btn btn-warning" title="imprimir">
                             <i class="fas fa-print"></i>
                         </a>
-                        <a data-toggle="modal" data-target="#modal-delete-{{ $movimiento->id }}" class="btn btn-danger btn-sm" title="eliminar">
+                        <a data-toggle="modal" data-target="#modal-delete-{{ $movimiento->id }}" class="btn btn-danger" title="eliminar">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>
                 </tr>
-                @include('inventarios.movimientos.modal')
+                @include('almaceneros.modal')
             @endforeach
         </tbody>
     </table>

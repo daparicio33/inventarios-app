@@ -2,25 +2,7 @@
 @section('title', 'Existencias')
 @section('content_header')
 <h1>Existencias del Inventario</h1>
-<ul class="nav active bg-light rounded border border-info mt-2 mb-2">
-    <li class="nav-item">
-        <a class="nav-link btn btn-light" href="{{ route('inventarios.existencias.index') }}">
-            <i class="fas fa-door-open"></i> Existencias
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link btn btn-light active" href="{{ route('inventarios.existencias.show','ingresos') }}">
-            <i class="fas fa-share-square"></i> Ingresos
-        </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled">Disabled</a>
-    </li>
-</ul>    
-
+<x-navbar activo="ingresos" />
 @stop
 @section('content')
 <div class="card">
@@ -46,7 +28,7 @@
                         <td>{{ $item->marca->nombre }}</td>
                         <td>{{ $item->titem->nombre }}</td>
                         <td>
-                            <span class="badge bg-secondary rounded-pill">en almacen {{ ingresos($item->id) }}</span>
+                            <span class="badge bg-secondary rounded-pill">ingresos en el almacen {{ ingresos($item->id) }}</span>
                         </td>
                     </tr>
                     @if (count($item->hijos) != 0) 
@@ -55,7 +37,7 @@
                                 <td colspan="3">
                                     <ol class="list-group list-group-numbered">
                                         @foreach ($item->hijos as $hijo)
-                                            <li class="list-group-item">{{ $hijo->codigo }} - {{ $hijo->descripcion }} <span class="badge bg-primary rounded-pill">En almacen {{ ingresos($hijo->id) }}</span></li>
+                                            <li class="list-group-item">{{ $hijo->codigo }} - {{ $hijo->descripcion }} <span class="badge bg-primary rounded-pill">ingresos en el {{ ingresos($hijo->id) }}</span></li>
                                         @endforeach
                                     </ol>   
                                 </td>
