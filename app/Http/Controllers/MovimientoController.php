@@ -85,6 +85,7 @@ class MovimientoController extends Controller
             $movimiento->numero = $numero;
             $movimiento->fdevolucion = $request->fdevolucion;
             $movimiento->cliente_id = $request->cliente_id;
+            $movimiento->user_id = auth()->id();
             $movimiento->almacene_id = almacen();
             $movimiento->save();
             $rows = count($request->items_id);
@@ -111,7 +112,6 @@ class MovimientoController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
-            dd($th->getMessage());
             return Redirect::route('inventarios.movimientos.index')
             ->with('error',$th->getMessage());
         }

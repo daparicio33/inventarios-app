@@ -2,7 +2,7 @@
 @section('title', 'Existencias')
 @section('content_header')
 <h1>Existencias del Inventario</h1>
-<x-navbar activo="existencias" />
+<x-navbar activo="perdidas" />
 @stop
 @section('content')
 <div class="card">
@@ -28,7 +28,7 @@
                         <td>{{ $item->marca->nombre }}</td>
                         <td>{{ $item->titem->nombre }}</td>
                         <td>
-                            <span class="badge bg-secondary rounded-pill">en almacen {{ numeros($item->id) }}</span>
+                            <span class="badge bg-secondary rounded-pill">perdidas en el almacen {{ perdidas($item->id) }}</span>
                         </td>
                     </tr>
                     @if (count($item->hijos) != 0) 
@@ -37,7 +37,7 @@
                                 <td colspan="3">
                                     <ol class="list-group list-group-numbered">
                                         @foreach ($item->hijos as $hijo)
-                                            <li class="list-group-item">{{ $hijo->codigo }} - {{ $hijo->descripcion }} <span class="badge bg-primary rounded-pill">En almacen {{ numeros($hijo->id) }}</span></li>
+                                            <li class="list-group-item">{{ $hijo->codigo }} - {{ $hijo->descripcion }} <span class="badge bg-primary rounded-pill">perdidas en el {{ perdidas($hijo->id) }}</span></li>
                                         @endforeach
                                     </ol>   
                                 </td>

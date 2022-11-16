@@ -24,7 +24,9 @@ class ExistenciaController extends Controller
         ->get();
         return view('inventarios.existencias.index',compact('items'));
     }
+    public function ingresos(){
 
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -52,9 +54,27 @@ class ExistenciaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($tipo)
     {
-        //
+        if ($tipo == 'ingresos'){
+            $items = Item::orderBy('id','desc')
+            ->where('item_id','=',null)
+            ->get();
+            return view('inventarios.existencias.ingresos',compact('items'));
+        }
+        if ($tipo == 'reposicion'){
+            $items = Item::orderBy('id','desc')
+            ->where('item_id','=',null)
+            ->get();
+            return view('inventarios.existencias.reposiciones',compact('items'));
+        }
+
+        if ($tipo == 'perdida'){
+            $items = Item::orderBy('id','desc')
+            ->where('item_id','=',null)
+            ->get();
+            return view('inventarios.existencias.perdidas',compact('items'));
+        }
     }
 
     /**
