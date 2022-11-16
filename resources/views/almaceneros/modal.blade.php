@@ -88,6 +88,7 @@
         <div class="modal-body">
           <p>Esta seguro que desea registrar el regreso de prestamo #<b>{{ $movimiento->numero }}</b> al inventario</p>
           <div class="row">
+            {!! Form::hidden('movimiento_id', $movimiento->id, [null]) !!}
             @foreach ($movimiento->detalles as $detalle)
               <div class="col-sm-2">
                   <x-adminlte-input-switch name="iswText-{{ $detalle->id }}" data-on-text="SI" data-off-text="NO"

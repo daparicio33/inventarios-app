@@ -7,8 +7,8 @@ use App\Models\Item;
 use App\Models\Movimiento;
 use App\Models\MovimientoDetalle;
 use App\Models\Tmovimiento;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
@@ -171,7 +171,7 @@ class AlmaceneroController extends Controller
     public function devoluciones(Request $request,$id){
         dd($request);
         try {
-            $fecha = Carbon::now();
+            $fecha = Carbon::now()->toDateString();
             //code...
             $num = Movimiento::select('numero')->orderBy('numero','desc')
             ->first();
@@ -193,11 +193,14 @@ class AlmaceneroController extends Controller
                 $prestado->movimiento_id = $devuelto->id;
                 $prestado->update();
                 //iniciamos con los detalles
+                
             DB::commit();
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
             dd($th->getMessage());
+            return redirect::route('almaceneros.index')->with('error','nose registro correctamente la devolucion');
         }
+        return redirect::route('almaceneros.index')->with('info','se guardo la informacion correctamente');
     }
 }
