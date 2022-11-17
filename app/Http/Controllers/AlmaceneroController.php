@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-
+use PDF;
 class AlmaceneroController extends Controller
 {
     /**
@@ -28,7 +28,7 @@ class AlmaceneroController extends Controller
         //
         $movimientos = Movimiento::orderBy('id','desc')
         ->whereRelation('tmovimiento','nombre','Prestamo')
-        ->orWhereRelation('tmovimiento','nombre','Devolucion')
+        /* ->orWhereRelation('tmovimiento','nombre','Devolucion') */
         ->where('almacene_id','=',almacen())
         ->get();
         return view('almaceneros.index',compact('movimientos'));
@@ -167,11 +167,23 @@ class AlmaceneroController extends Controller
     public function destroy($id)
     {
         //
+        try {
+            //code...
+            $moviento = Movimiento::findOrFail($id);
+            $moviento->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
+            return Redirect::route('almaceneros.index')
+            ->with('error',$th->getMessage());
+        }
+        return Redirect::route('almaceneros.index')
+        ->with('info','se elimino correctamente');
     }
     public function devoluciones(Request $request,$id){
-        dd($request);
+        //dd ($request);
         try {
             $fecha = Carbon::now()->toDateString();
+            $hora = Carbon::now()->toTimeString();
             //code...
             $num = Movimiento::select('numero')->orderBy('numero','desc')
             ->first();
@@ -189,11 +201,29 @@ class AlmaceneroController extends Controller
                 $devuelto->cliente_id = $prestado->cliente_id;
                 $devuelto->almacene_id = $prestado->almacene_id;
                 $devuelto->movimiento_id = $prestado->id;
+                $devuelto->hora = $hora;
+                $devuelto->user_id = auth()->id();
                 $devuelto->save();
                 $prestado->movimiento_id = $devuelto->id;
                 $prestado->update();
                 //iniciamos con los detalles
-                
+                foreach ($prestado->detalles as $detalle) {
+                    # code...
+                    //con los prestados vamos adevolverlos
+                    if(buscar($request->opciones,$detalle->id)){
+                        //se encontro el producto
+                        //y tenemos que agregarlo a la devolucion.
+                        $detalleprestado = MovimientoDetalle::findOrFail($detalle->id);
+                        $detalledevuelto = new MovimientoDetalle();
+                        $detalledevuelto->item_id = $detalleprestado->item_id;
+                        $detalledevuelto->movimiento_id = $devuelto->id;
+                        $detalledevuelto->cantidad = $detalleprestado->cantidad;
+                        $detalledevuelto->save();
+                    }else{
+                        //nose encontro y debemos registrar como perdido.
+                        //o en caso contrario ver que hacemos.
+                    }
+                }
             DB::commit();
         } catch (\Throwable $th) {
             //throw $th;
@@ -202,5 +232,12 @@ class AlmaceneroController extends Controller
             return redirect::route('almaceneros.index')->with('error','nose registro correctamente la devolucion');
         }
         return redirect::route('almaceneros.index')->with('info','se guardo la informacion correctamente');
+    }
+    public function imprimir($id){
+        $movimiento = Movimiento::findOrFail($id);
+        /* $pdf = PDF::loadview('almaceneros.imprimir',['movimiento'=>$movimiento]);
+        $pdf->setPaper('a4','landscape');
+        return $pdf->download('pdfa.pdf'); */
+        return view('almaceneros.imprimir',compact('movimiento'));
     }
 }

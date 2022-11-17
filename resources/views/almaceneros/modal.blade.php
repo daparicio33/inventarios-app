@@ -1,4 +1,4 @@
-{!! Form::open(["route"=>["inventarios.movimientos.destroy",$movimiento->id],"method"=>"delete"]) !!}
+{!! Form::open(["route"=>["almaceneros.destroy",$movimiento->id],"method"=>"delete"]) !!}
 <div class="modal fade" id="modal-delete-{{ $movimiento->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -90,12 +90,14 @@
           <div class="row">
             {!! Form::hidden('movimiento_id', $movimiento->id, [null]) !!}
             @foreach ($movimiento->detalles as $detalle)
-              <div class="col-sm-2">
-                  <x-adminlte-input-switch name="iswText-{{ $detalle->id }}" data-on-text="SI" data-off-text="NO"
-                  data-on-color="teal" checked/>
-              </div>
-              <div class="col-sm-10">
-                  {{ $detalle->item->descripcion }}
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <input type="checkbox" name="opciones[]" value="{{ $detalle->id }}" checked aria-label="Checkbox for following text input">
+                  </div>
+                </div>
+                <input type="text" readonly class="form-control" aria-label="Text input with checkbox" value="{{ $detalle->item->titem->nombre }} - {{ $detalle->item->marca->nombre }} - {{ $detalle->item->descripcion }}">
               </div>
             @endforeach
           </div>

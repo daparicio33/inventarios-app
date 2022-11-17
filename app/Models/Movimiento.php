@@ -26,8 +26,11 @@ class Movimiento extends Model
         return $this->belongsTo(Item::class,'item_id');
     }
  */
-    public function devolucion(){
-        return $this->hasOne(Movimiento::class);
+    public function devoluciones(){
+        return $this->hasMany(Movimiento::class);
+    }
+    public function prestamos(){
+        return $this->belongsTo(Movimiento::class,'movimiento_id');
     }
     public function cliente(){
         return $this->belongsTo(Cliente::class,'cliente_id','idCliente');

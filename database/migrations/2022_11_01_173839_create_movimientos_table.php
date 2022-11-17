@@ -20,11 +20,12 @@ class CreateMovimientosTable extends Migration
             $table->date('fecha');
             $table->time('hora');
             $table->date('fdevolucion')->nullable();
+            $table->text('observacion')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('tmovimiento_id');
             $table->unsignedBigInteger('movimiento_id')->nullable();
             $table->foreign('tmovimiento_id')->references('id')->on('tmovimientos');
-            $table->foreign('movimiento_id')->references('id')->on('movimientos');
+            $table->foreign('movimiento_id')->references('id')->on('movimientos')->nullOnDelete();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

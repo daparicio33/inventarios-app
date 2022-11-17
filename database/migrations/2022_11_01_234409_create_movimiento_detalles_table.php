@@ -18,6 +18,7 @@ class CreateMovimientoDetallesTable extends Migration
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('movimiento_id');
             $table->decimal('cantidad',10,2);
+            $table->text('observacion')->nullable();
             $table->foreign('movimiento_id')->references('id')->on('movimientos')->onDelete('cascade');
             $table->foreign('item_id')->references('id')->on('items');
             $table->timestamps();

@@ -42,6 +42,8 @@ Route::resource('almaceneros',AlmaceneroController::class)
 ->names('almaceneros');
 Route::post('almaceneros/devoluciones/{id}',[AlmaceneroController::class,'devoluciones'])
 ->name('almaceneros.devoluciones');
+Route::get('almaceneros/devoluciones/{id}',[AlmaceneroController::class,'imprimir'])
+->name('almaceneros.imprimir');
 
 //rutas para los items
 Route::resource('inventarios/items',ItemController::class)
