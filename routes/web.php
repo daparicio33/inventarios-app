@@ -82,3 +82,6 @@ Route::get('clear-cache',function(){
    echo Artisan::call('config:cache');
    echo Artisan::call('route:cache');
 });
+Route::get('link',function(){
+   echo Artisan::call('storage:link');
+});

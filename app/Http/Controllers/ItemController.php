@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\Marca;
 use App\Models\Titem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
@@ -73,7 +74,15 @@ class ItemController extends Controller
                 $url = Storage::put('public/items', $request->file('url'));
                 $item->url = $url;
             }
-            $item->codigo = $request->codigo;
+            //verificamos que el codigo este lleno
+            if(isset($request->codigo)){
+                $item->codigo = $request->codigo;
+            }else{
+                $numero = DB::table('codigos')
+                ->orderBy('numero','desc')
+                ->first();
+                $item->codigo = ceroscodigos($numero->numero+1);
+            }
             $item->descripcion = $request->descripcion;
             $item->almacene_id = almacen();
             $item->save();
@@ -142,7 +151,15 @@ class ItemController extends Controller
                 $url = Storage::put('public/items', $request->file('url'));
                 $item->url = $url;
             }
-            $item->codigo = $request->codigo;
+            //verificamos que el codigo este lleno
+            if(isset($request->codigo)){
+                $item->codigo = $request->codigo;
+            }else{
+                $numero = DB::table('codigos')
+                ->orderBy('numero','desc')
+                ->first();
+                $item->codigo = ceroscodigos($numero->numero+1);
+            }
             $item->descripcion = $request->descripcion;
             $item->update();
         } catch (\Throwable $th) {

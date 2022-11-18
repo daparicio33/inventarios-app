@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class UsuarioController extends Controller
 {
@@ -50,9 +51,13 @@ class UsuarioController extends Controller
     {
         //
         $user = new User();
+        if($request->hasFile('url')){
+            $url = Storage::put('public/userspics', $request->file('url'));
+        }
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->url = $url;
         $user->save();
         return Redirect::route('administrador.usuarios.index');
     }
@@ -92,6 +97,10 @@ class UsuarioController extends Controller
     {
         //
         $user = User::findOrfail($id);
+        if($request->hasFile('url')){
+            $url = Storage::put('public/userspics', $request->file('url'));
+            $user->url = $url;
+        }
         $user->name = $request->name;
         $user->email = $request->email;
         if(isset($request->password)){

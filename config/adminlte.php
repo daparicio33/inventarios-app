@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Sistema de Inventario',
+    'title' => 'Sistema de Almacenes',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,8 +63,8 @@ return [
     |
     */
 
-    'logo' => '<b>Sistema </b>INV.',
-    'logo_img' => 'vendor/adminlte/dist/img/vmwareLogo.png',
+    'logo' => '<b>Sistema </b>ALM.',
+    'logo_img' => 'vendor/adminlte/dist/img/logoIDEX.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/virtualBox.png',
+            'path' => 'vendor/adminlte/dist/img/logoIDEX.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,

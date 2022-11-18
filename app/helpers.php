@@ -3,7 +3,14 @@
 use App\Models\MovimientoDetalle;
 use App\Models\Tmovimiento;
 use App\Models\User;
-
+function ceroscodigos($numero){
+    $tamanio = strlen($numero);
+    $salida = $numero;
+    for($i=$tamanio; $i<8;$i++){
+        $salida= '0'.$salida;
+    }
+    return $salida;
+}
 function ceros($numero){
     $tamanio = strlen($numero);
     $salida = $numero;

@@ -1,4 +1,4 @@
-{!! Form::open(['route'=>['administrador.usuarios.update',$user->id], 'method'=>'put']) !!}
+{!! Form::open(['route'=>['administrador.usuarios.update',$user->id], 'method'=>'put', 'enctype'=>'multipart/form-data']) !!}
 <div class="container">
     <div class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" id="modaledit{{ $user->id }}">
         <div class="modal-dialog modal-dialog-centered">
@@ -15,9 +15,9 @@
                                 <div class="row mt-3">
                                 <div class="col-sm-12 col-md-8 col-lg-8 mx-auto ">
                                   <div class="card">
-                                      <img id='imgpreview' style="max-width: 90%" src="{{ Storage::url('public/items/defaultitem.png') }}" class="rounded mx-auto d-block" alt="...">
+                                      <img id='imgpreview{{ $user->id }}' style="max-width: 90%" @if(isset($user->url)) src="{{ Storage::url($user->url) }}" @else src="{{ Storage::url('public/userspics/defaultPic.png') }}" @endif class="rounded mx-auto d-block" alt="...">
                                       <div class="card-body">
-                                          <x-adminlte-input-file onchange="previewimage(event,'#imgpreview')" name="url" >
+                                          <x-adminlte-input-file onchange="previewimage(event,'#imgpreview{{ $user->id }}')" name="url" >
                                               <x-slot name="prependSlot">
                                                   <div class="input-group-text bg-primary">
                                                       <i class="fas fa-upload"></i>
@@ -34,7 +34,7 @@
                                 <label for="validationDefault02">Correo</label>
                                 <input type="email" name="email" value="{{ $user->email }}" class="form-control" id="validationDefault02" required>
                                 <label for="validationDefault03">Contraseña</label>
-                                <input type="password" name="password" value="{{ $user->password }}" class="form-control" id="validationDefault03" required>
+                                <input type="password" name="password" class="form-control" id="validationDefault03" required>
                               </div>
                                 <div class="card-footer">
                                     <button class="btn btn-success" type="submit"><i class="fas fa-upload"></i> Guardar</button>

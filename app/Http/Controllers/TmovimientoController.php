@@ -12,12 +12,13 @@ class TmovimientoController extends Controller
     //
     public function __construct()
     {
+        $this->middleware('auth');
         $this->middleware('can:inventarios.movimientos.tmovimientos.index')->only('index');
         $this->middleware('can:inventarios.movimientos.tmovimientos.create')->only('create','store');
         $this->middleware('can:inventarios.movimientos.tmovimientos.edit')->only('edit','update');
         $this->middleware('can:inventarios.movimientos.tmovimientos.destroy')->only('destroy');
         $this->middleware('can:inventarios.movimientos.tmovimientos.show')->only('show');
-        $this->middleware('auth');
+        
     }
     public function index(){
         $tmovimientos = Tmovimiento::all();

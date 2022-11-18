@@ -35,7 +35,7 @@
           <tbody>
             @foreach ($users as $user)
               <tr>
-                <td><img id="foto" src="{{ Storage::url($user->url) }}"></td>
+                <td><img id="foto" @if(isset($user->url)) src="{{ Storage::url($user->url) }}" @else src="{{ Storage::url('public/userspics/defaultPic.png') }}" @endif></td>
                 <td style="width: 250px">{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td style="text-align:center">

@@ -16,12 +16,12 @@ class EncargadoController extends Controller
     //
     public function __construct()
     {
+        $this->middleware('auth');
         $this->middleware('can:administrador.almacenes.encargados.index')->only('index');
         $this->middleware('can:administrador.almacenes.encargados.create')->only('create','store');
         $this->middleware('can:administrador.almacenes.encargados.edit')->only('edit','update');
         $this->middleware('can:administrador.almacenes.encargados.destroy')->only('destroy');
         $this->middleware('can:administrador.almacenes.encargados.show')->only('show');
-        $this->middleware('auth');
     }
 
     public function index (){

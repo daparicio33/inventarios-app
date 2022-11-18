@@ -11,12 +11,12 @@ class AlmaceneController extends Controller
     //
     public function __construct()
     {
+        $this->middleware('auth');
         $this->middleware('can:administrador.almacenes.index')->only('index');
         $this->middleware('can:administrador.almacenes.create')->only('create','store');
         $this->middleware('can:administrador.almacenes.edit')->only('edit','update');
         $this->middleware('can:administrador.almacenes.destroy')->only('destroy');
         $this->middleware('can:administrador.almacenes.show')->only('show');
-        $this->middleware('auth');
     }
 
     public function index(){

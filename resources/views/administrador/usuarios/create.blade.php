@@ -15,7 +15,7 @@
                                 <div class="row mt-3">
                                 <div class="col-sm-12 col-md-8 col-lg-8 mx-auto ">
                                   <div class="card">
-                                      <img id='imgpreview' style="max-width: 90%" src="{{ Storage::url('public/items/defaultitem.png') }}" class="rounded mx-auto d-block" alt="...">
+                                      <img id='imgpreview' style="max-width: 90%" src="{{ Storage::url('public/userspics/defaultPic.png') }}" class="rounded mx-auto d-block" alt="...">
                                       <div class="card-body">
                                           <x-adminlte-input-file onchange="previewimage(event,'#imgpreview')" name="url" >
                                               <x-slot name="prependSlot">

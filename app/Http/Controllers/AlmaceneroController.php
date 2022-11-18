@@ -21,12 +21,12 @@ class AlmaceneroController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('auth');
         $this->middleware('can:almaceneros.index')->only('index');
         $this->middleware('can:almaceneros.create')->only('create','store');
         $this->middleware('can:almaceneros.edit')->only('edit','update');
         $this->middleware('can:almaceneros.destroy')->only('destroy');
         $this->middleware('can:almaceneros.show')->only('show');
-        $this->middleware('auth');
     }
     public function index()
     {
