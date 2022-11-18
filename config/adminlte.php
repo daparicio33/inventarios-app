@@ -319,12 +319,12 @@ return [
             'label_color' => 'success',
         ], */
         
-        ['header' => 'account_settings'],
+        /* ['header' => 'account_settings'],
         [
             'text' => 'profile',
             'route'  => 'user.settings',
             'icon' => 'fas fa-fw fa-user',
-        ],
+        ], */
         /* [
             'text' => 'change_password',
             'url'  => 'admin/settings',
@@ -333,6 +333,7 @@ return [
         [
             'text'=>'ADMINISTRADOR',
             'icon'=>'fas fa-users-cog',
+            'can'=>'administrador.usuarios.index',
             'submenu'=>[
                 [
                     'text'=>'Almacenes',
@@ -365,6 +366,7 @@ return [
         [
             'text'=>'INVENTARIOS',
             'icon'=>'fas fa-truck-moving',
+            'can'=>'inventarios.marcas.index',
             'submenu'=>[
                 [
                     'text'=>'Movimientos',
@@ -407,6 +409,7 @@ return [
         [
             'text'=>'ALAMCENERO',
             'icon'=>'fas fa-users',
+            'can'=>'almaceneros.index',
             'submenu'=>[
                 [
                     'text'=>'Registros',

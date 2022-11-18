@@ -15,7 +15,12 @@ class TitemController extends Controller
      */
     public function __construct()
     {
-        return $this->middleware('auth');
+        $this->middleware('can:inventarios.titems.index')->only('index');
+        $this->middleware('can:inventarios.titems.create')->only('create','store');
+        $this->middleware('can:inventarios.titems.edit')->only('edit','update');
+        $this->middleware('can:inventarios.titems.destroy')->only('destroy');
+        $this->middleware('can:inventarios.titems.show')->only('show');
+        $this->middleware('auth');
     }
     public function index()
     {

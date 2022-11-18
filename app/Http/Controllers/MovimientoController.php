@@ -20,7 +20,12 @@ class MovimientoController extends Controller
      */
     public function __construct()
     {
-        return $this->middleware('auth');
+        $this->middleware('can:inventarios.movimientos.encargados.index')->only('index');
+        $this->middleware('can:inventarios.movimientos.encargados.create')->only('create','store');
+        $this->middleware('can:inventarios.movimientos.encargados.edit')->only('edit','update');
+        $this->middleware('can:inventarios.movimientos.encargados.destroy')->only('destroy');
+        $this->middleware('can:inventarios.movimientos.encargados.show')->only('show');
+        $this->middleware('auth');
     }
     public function index()
     {

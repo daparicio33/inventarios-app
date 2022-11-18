@@ -16,7 +16,7 @@
   <div class="row">
       <div class="col-sm-6 col-lg-12">
           <button id="nuevo" class="btn btn-primary" type="button" data-toggle='modal' data-target='#modalcreate' ><i class="fas fa-plus"></i>
-          Nuevo Tipo de Item</button>    
+          Nuevo</button>    
       </div>    
   </div>       
 </div>

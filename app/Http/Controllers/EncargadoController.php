@@ -7,14 +7,21 @@ use App\Models\Cargo;
 use App\Models\Encargado;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\Permission\Models\Role;
 
 class EncargadoController extends Controller
 {
     //
     public function __construct()
     {
-        return $this->middleware('auth');
+        $this->middleware('can:administrador.almacenes.encargados.index')->only('index');
+        $this->middleware('can:administrador.almacenes.encargados.create')->only('create','store');
+        $this->middleware('can:administrador.almacenes.encargados.edit')->only('edit','update');
+        $this->middleware('can:administrador.almacenes.encargados.destroy')->only('destroy');
+        $this->middleware('can:administrador.almacenes.encargados.show')->only('show');
+        $this->middleware('auth');
     }
 
     public function index (){
@@ -38,8 +45,15 @@ class EncargadoController extends Controller
             $encargado = new Encargado;
             $encargado->user_id= $request->user_id;
             $encargado->cargo_id= $request->cargo_id;
+            //debemos sincronizar los permisos
+            $user = User::findOrFail($request->user_id);
+            //buscamos el nombre del rol
             $encargado->almacene_id= $request->almacene_id;
             $encargado->save();
+            $cargo = Cargo::findOrFail($request->cargo_id);
+            $role = Role::where('name','=',$cargo->nombre)->first();
+            $user->assignRole($role->id);
+            //find del rol
             DB::commit();
         } catch (\Throwable $th) {
             //throw $th;
@@ -69,10 +83,18 @@ class EncargadoController extends Controller
                 $encargado->cargo_id = $request->cargo_id;
                 $encargado->almacene_id = $request->almacene_id;
                 $encargado->update();
+                //debemos sincronizar los permisos
+                $user = User::findOrFail($request->user_id);
+                //buscamos el nombre del rol
+                $cargo = Cargo::findOrFail($request->cargo_id);
+                $role = Role::where('name','=',$cargo->nombre)->first();
+                $user->assignRole($role->id);
+                //find del rol
             DB::commit();
         } catch (\Throwable $th) {
             //throw $th
             DB::rollback();
+            dd($th->getMessage());
             return Redirect::route('administrador.almacenes.encargados.index')
             ->with('error','ocurrio un error cuando se intento guardar los datos del encargado');
         }

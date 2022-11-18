@@ -12,7 +12,12 @@ class CargoController extends Controller
     //
     public function __construct()
     {
-        return $this->middleware('auth');
+        $this->middleware('can:administrador.cargos.index')->only('index');
+        $this->middleware('can:administrador.cargos.create')->only('create','store');
+        $this->middleware('can:administrador.cargos.edit')->only('edit','update');
+        $this->middleware('can:administrador.cargos.destroy')->only('destroy');
+        $this->middleware('can:administrador.cargos.show')->only('show');
+        $this->middleware('auth');
     }
     public function index(){
         $cargos = Cargo::all();

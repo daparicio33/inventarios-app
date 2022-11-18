@@ -1,13 +1,29 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Inventarios')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1 class="text-danger">Sistema de Inventarios</h1>
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <p>Bienvenido al sistema de Gestion de Inventarios.</p>
+    <small>Sistema Desarrollado por:
+        <ul>
+            <li>Aparicio Palomino Davis Williams - <b>Supervisor del Proyecto</b></li>
+            <li>Llaja Huaman Neymer Jesus</li>
+            <li>Valqui Puerta Dilberth</li>
+            <li>Acuña Chavez Dante Miguel</li>
+            <li>Pinzón Hernández Fernanda Elizabeth</li>
+            <li>Yoplac Muñoz Kevin Alexis</li>
+            <li>Campojo Mas Luis Antonio</li>
+            <li>Chota Mas Edwin Maycol</li>
+            <li>Pilco Mas Waldir</li>
+            <li>Medina Muñoz José Antonio </li>
+        </ul>
+
+    </small>
+    <p class="font-italic">Todos los derechos reservados al Laboratorio de Programacion IDEX Perú Japón - 2022</p>
 @stop
 
 @section('css')

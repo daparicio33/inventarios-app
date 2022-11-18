@@ -28,8 +28,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
-
+Auth::routes(["register" => false]);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //rutas para administrar el perfil
 Route::get('user/settings',function(){

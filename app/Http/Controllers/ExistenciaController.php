@@ -14,7 +14,7 @@ class ExistenciaController extends Controller
      */
     public function __construct()
     {
-        return $this->middleware('auth');
+        $this->middleware('auth');
     }
     public function index()
     {

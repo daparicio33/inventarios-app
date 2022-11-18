@@ -15,6 +15,11 @@ class UsuarioController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('can:administrador.usuarios.index')->only('index');
+        $this->middleware('can:administrador.usuarios.create')->only('create','store');
+        $this->middleware('can:administrador.usuarios.edit')->only('edit','update');
+        $this->middleware('can:administrador.usuarios.destroy')->only('destroy');
+        $this->middleware('can:administrador.usuarios.show')->only('show');
         return $this->middleware('auth');
     }
     public function index()
