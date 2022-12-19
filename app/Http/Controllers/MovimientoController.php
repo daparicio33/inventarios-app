@@ -75,6 +75,7 @@ class MovimientoController extends Controller
         ]);
         $num = Movimiento::select('numero')->orderBy('numero','desc')
         ->first();
+        dd($num);
         if (isset($num->numero)){
             $numero = $num->numero + 1;
         }else{

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,4 +85,14 @@ Route::get('clear-cache',function(){
 });
 Route::get('link',function(){
    echo Artisan::call('storage:link');
+});
+Route::get('clear', function () {
+   Storage::deleteDirectory('public');
+   Storage::makeDirectory('public');
+   Artisan::call('route:clear');
+   Artisan::call('storage:link', [] );
+});
+
+Route::get('link2',function(){
+   symlink('/home/idexounk/inventarios-app/storage/app/public', '/home/idexounk/almacenes.idexperujapon.edu.pe/storage');
 });

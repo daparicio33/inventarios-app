@@ -56,8 +56,7 @@ class UsuarioController extends Controller
         }
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = $request->password;
-        $user->url = $url;
+        $user->password = bcrypt($request->password);
         $user->save();
         return Redirect::route('administrador.usuarios.index');
     }
@@ -104,7 +103,7 @@ class UsuarioController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         if(isset($request->password)){
-            $user->password = $request->password;
+            $user->password = bcrypt($request->password);
         }
         $user->update();
         return Redirect::route('administrador.usuarios.index');

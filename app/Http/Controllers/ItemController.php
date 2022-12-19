@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Codigo;
 use App\Models\Item;
 use App\Models\Marca;
 use App\Models\Titem;
@@ -82,6 +83,8 @@ class ItemController extends Controller
                 ->orderBy('numero','desc')
                 ->first();
                 $item->codigo = ceroscodigos($numero->numero+1);
+                Codigo::create(['numero'=>$numero->numero+1]);
+
             }
             $item->descripcion = $request->descripcion;
             $item->almacene_id = almacen();
