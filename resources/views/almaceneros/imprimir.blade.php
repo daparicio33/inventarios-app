@@ -116,24 +116,30 @@
                                             <td>{{ $detalle->cantidad }}</td>
                                             <td>{{ $detalle->item->titem->nombre }} - {{ $detalle->item->marca->nombre }} - {{ $detalle->item->descripcion }} <span class="badge">{{ count($detalle->item->hijos) }} items</span></td>
                                         </tr>
-                                        @if (count($detalle->item->hijos) != 0)
-                                                <tr>
-                                                    <td></td>
-                                                    <td colspan="4">
-                                                        <ul style="margin: 0px">
-                                                            @foreach ($detalle->item->hijos as $hijo)
-                                                                <li class="list-group-item">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                            {{ $hijo->codigo }} - {{ $detalle->cantidad }} - {{ $hijo->descripcion }}
+                                            @if (count($detalle->item->hijos) != 0)
+                                                    <tr>
+                                                        <td></td>
+                                                        <td colspan="4">
+                                                            <ul style="margin: 0px">
+                                                                @foreach ($detalle->item->hijos as $hijo)
+                                                                    <li class="list-group-item">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-12 col-md-12 col-lg-12" id="hijo-{{ $hijo->codigo  }}">
+                                                                                {{ $hijo->codigo }} - {{ $detalle->cantidad }} - {{ $hijo->descripcion }}
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                        @endif
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                            @endif
+                                            @else
+                                            <tr @if (count($detalle->item->hijos) != 0) class="bg-info" @endif  id="item-{{ $detalle->item->codigo }}">
+                                                <td>{{ $detalle->item->codigo }}</td>
+                                                <td>{{ $detalle->cantidad }}</td>
+                                                <td>{{ $detalle->item->titem->nombre }} - {{ $detalle->item->marca->nombre }} - {{ $detalle->item->descripcion }} <span class="badge">{{ count($detalle->item->hijos) }} items</span></td>
+                                            </tr>
                                         @endif
                                     @endforeach
                                 </tbody>
@@ -224,7 +230,7 @@
                                         <th>Descripción</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody> 
                                     @foreach ($movimiento->detalles as $detalle)
                                     @if($detalle->item->item_id == null) 
                                         <tr @if (count($detalle->item->hijos) != 0) class="bg-info" @endif>
@@ -250,6 +256,12 @@
                                                 </td>
                                             </tr>
                                         @endif
+                                        @else
+                                        <tr @if (count($detalle->item->hijos) != 0) class="bg-info" @endif id="item1-{{ $detalle->item->codigo }}">
+                                            <td>{{ $detalle->item->codigo }}</td>
+                                            <td>{{ $detalle->cantidad }}</td>
+                                            <td>{{ $detalle->item->titem->nombre }} - {{ $detalle->item->marca->nombre }} - {{ $detalle->item->descripcion }} <span class="badge">{{ count($detalle->item->hijos) }} items</span></td>
+                                        </tr>
                                     @endif
                                     @endforeach
                                 </tbody>
@@ -278,4 +290,22 @@
         </tr>
     </table>
 </body>
+<script>
+    window.addEventListener("load", miFuncion);
+    function miFuncion() {
+        let hijos  = document.querySelectorAll("[id^='hijo']")
+        for (let i = 0 ; i < hijos.length; i++){
+            var id = hijos[i].id;
+            var id = id.split("-");
+            var item = document.getElementById("item-"+id[1]);
+            var item1 = document.getElementById("item1-"+id[1]);
+            if(item){
+                item.remove();
+                item1.remove();
+                console.log(id[1]);
+            }
+        }
+        // Código que se ejecutará cuando se cargue la página
+    }
+</script>
 </html>

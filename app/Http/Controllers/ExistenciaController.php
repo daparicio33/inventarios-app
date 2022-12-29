@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ExistenciaController extends Controller
@@ -19,8 +20,11 @@ class ExistenciaController extends Controller
     public function index()
     {
         //
+        
+        $usuario = User::findOrFail(auth()->id());
         $items = Item::orderBy('id','desc')
         ->where('item_id','=',null)
+        ->where('almacene_id','=',$usuario->encargado->almacene_id)
         ->get();
         return view('inventarios.existencias.index',compact('items'));
     }
@@ -56,15 +60,18 @@ class ExistenciaController extends Controller
      */
     public function show($tipo)
     {
+        $usuario = User::findOrFail(auth()->id());
         if ($tipo == 'ingresos'){
             $items = Item::orderBy('id','desc')
             ->where('item_id','=',null)
+            ->where('almacene_id','=',$usuario->encargado->almacene_id)
             ->get();
             return view('inventarios.existencias.ingresos',compact('items'));
         }
         if ($tipo == 'reposicion'){
             $items = Item::orderBy('id','desc')
             ->where('item_id','=',null)
+            ->where('almacene_id','=',$usuario->encargado->almacene_id)
             ->get();
             return view('inventarios.existencias.reposiciones',compact('items'));
         }
@@ -72,6 +79,7 @@ class ExistenciaController extends Controller
         if ($tipo == 'perdida'){
             $items = Item::orderBy('id','desc')
             ->where('item_id','=',null)
+            ->where('almacene_id','=',$usuario->encargado->almacene_id)
             ->get();
             return view('inventarios.existencias.perdidas',compact('items'));
         }

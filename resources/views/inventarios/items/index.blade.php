@@ -74,6 +74,9 @@
                 @include('inventarios.items.modal')
             @endforeach
         </tbody>
+        <tfoot>
+            {{ $items->render() }}
+        </tfoot>
     </table>
 @stop
 @section('js')

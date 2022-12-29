@@ -28,7 +28,7 @@ class ItemController extends Controller
         $items = Item::orderBy('id','desc')
         ->where('item_id','=',null)
         ->where('almacene_id','=',almacen())
-        ->get();
+        ->paginate(10);
         return view('inventarios.items.index',compact('items'));
     }
 
